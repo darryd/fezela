@@ -63,15 +63,16 @@ bool Board::is_in_check(Side side) {
     for (int y=0; y<TOTAL_ROWS; y++) {
 
       Position pos = Position(x, y);
+      list_covers.clear();
 
-      // Get covers for piece if it is an oppenent.
+      // Step 1: Get covers for piece if it is an oppenent.
       Piece *piece = get_piece(x, y);
       if ( piece != NULL && piece->get_side() == opponent ) {
 
-	list_covers.clear();
 	piece->covers(list_covers, *this, pos);
       }
 
+      // Step 2: See if the opponent covers our king.
       // Return early if in check by that piece.
       for (vector<Position>::iterator i = list_covers.begin(); i != list_covers.end(); ++i) {
 
