@@ -1,0 +1,62 @@
+VPATH = players/
+
+CC = g++ 
+
+CFLAGS = -c -Wall -g 
+
+PLAYER_O_FILES = random_ai.o simply_counting_ai.o counting_and_checking_ai.o
+
+all: fezela
+
+fezela: castling_info.o game.o global_pieces.h players.h chess.h main.o piece.o \
+  rook.o knight.o bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) 
+	$(CC) -g -Wall castling_info.o game.o main.o piece.o rook.o knight.o \
+	  bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) -o fezela
+
+castling_info.o: chess.h castling_info.cpp 
+	$(CC) $(CFLAGS) castling_info.cpp
+
+game.o: chess.h game.cpp
+	$(CC) $(CFLAGS) game.cpp
+
+counting_and_checking_ai.o: chess.h players.h players/counting_and_checking_ai.cpp
+	$(CC) $(CFLAGS) counting_and_checking_ai.cpp
+
+random_ai: random_ai.o
+	$(CC) $(CFLAGS) random_ai.cpp
+
+simply_counting_ai: simply_counting_ai.o
+	$(CC) $(CFLAGS) simply_counting_ai.cpp
+
+main: main.o
+	$(CC) $(CFLAGS) main.cpp
+
+piece: piece.o
+	$(CC) $(CFLAGS) piece.cpp
+
+rook: rook.o
+	$(CC) $(CFLAGS) rook.cpp
+
+knight: knight.o
+	$(CC) $(CFLAGS) knight.cpp
+
+bishop: bishop.o
+	$(CC) $(CFLAGS) bishop.cpp
+
+queen: queen.o
+	$(CC) $(CFLAGS) queen.cpp
+
+king: king.o
+	$(CC) $(CFLAGS) king.cpp
+
+pawn: pawn.o
+	$(CC) $(CFLAGS) pawn.cpp
+
+utl: utl.o
+	$(CC) $(CFLAGS) utl.cpp
+	
+board: board.o
+	$(CC) $(CFLAGS) board.cpp
+
+clean:
+	rm *.o fezela
