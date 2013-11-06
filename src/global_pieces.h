@@ -1,4 +1,3 @@
-
 /*
 
     Copyright 2013 Darry Danzig
@@ -21,7 +20,7 @@
 */
 #pragma once
 
-// These pieces are global to save memory. 
+
 
     Rook w_rook;
     Rook w_k_rook(white, kings_rook);
