@@ -229,9 +229,7 @@ class Move {
     Position extra_old_pos;
     Position extra_new_pos;
 
-    Move() {
-      memset(this, 0, sizeof(Move));
-    }
+    Move(): is_castling(false), is_promotion(false) {}
 
 };
 
