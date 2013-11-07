@@ -226,8 +226,8 @@ class Move {
     bool is_castling;
     bool is_promotion;
 
-    Position old_castle_pos;
-    Position new_castle_pos;
+    Position extra_old_pos;
+    Position extra_new_pos;
 
     Move() {
       memset(this, 0, sizeof(Move));

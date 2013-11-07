@@ -281,14 +281,14 @@ void Board::move(Move &move) {
 
   if ( move.is_castling ) {
 
-    piece = get_piece(move.old_castle_pos);
+    piece = get_piece(move.extra_old_pos);
 
     if ( piece == NULL ) 
       return;
 
     update_castling_info(piece);
-    set_piece(piece, move.new_castle_pos);
-    set_piece(NULL, move.old_castle_pos);
+    set_piece(piece, move.extra_new_pos);
+    set_piece(NULL, move.extra_old_pos);
   }
 
 }

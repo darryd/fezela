@@ -75,8 +75,8 @@ void King::castle(vector<Board> &list_board_moves, Board &board) {
       castling_move.new_pos = CastlingInfo::get_king_after_castling_position(get_side(), rook_kind);
 
       castling_move.is_castling = true;
-      castling_move.old_castle_pos = CastlingInfo::get_rook_before_castling_position(get_side(), rook_kind);
-      castling_move.new_castle_pos = CastlingInfo::get_rook_after_castling_position(get_side(), rook_kind);
+      castling_move.extra_old_pos = CastlingInfo::get_rook_before_castling_position(get_side(), rook_kind);
+      castling_move.extra_new_pos = CastlingInfo::get_rook_after_castling_position(get_side(), rook_kind);
 
       Board castling_board(board);
       castling_board.move(castling_move);
