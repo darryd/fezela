@@ -115,6 +115,9 @@ void Piece::covers_in_dir (vector<Position> &list_covers, Board &board, Position
  * method Piece::default_moves
  *
  * For most pieces a move is the same as the covers minus any square containing another one of your pieces.
+ *
+ * Note:
+ * This method also filters out illegal moves (i.e. leaving one's own king in check.)
  * 
  * -------------------------------------------------------------------------------------------------------*/
 void Piece::default_moves(vector<Board> &list_boards, vector<Position> &list_covers, const Board &board, Position &pos) {

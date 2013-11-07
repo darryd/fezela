@@ -128,6 +128,7 @@ void Board::set() {
   clear();
 
   // Set the white side
+  
   _pieces[0][0] = &w_q_rook;
   _pieces[1][0] = &w_knight;
   _pieces[2][0] = &w_bishop;
@@ -152,7 +153,6 @@ void Board::set() {
 
   for (int x=0; x<TOTAL_ROWS; x++)
     _pieces[x][6] = &b_pawn;
-
 }
 
 /*--------------------------------------------------------------------------------------------------------
@@ -266,6 +266,8 @@ void Board::move(Move &move) {
 
   update_castling_info(piece);
 
+  //---------------castling
+ 
   if ( move.is_castling ) {
 
     piece = get_piece(move.extra_old_pos);
@@ -278,6 +280,12 @@ void Board::move(Move &move) {
     set_piece(NULL, move.extra_old_pos);
   }
 
+  //--------------- pawn promotion
+  if (move.promotion) 
+    set_piece(move.promotion, move.new_pos);
+
+  //--------------- en passant
+  // coming soon........
 }
 
 /*--------------------------------------------------------------------------------------------------------

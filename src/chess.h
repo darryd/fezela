@@ -194,11 +194,13 @@ class King : public Piece {
 class Pawn : public Piece {
 
   public:
-    Pawn (Side side=white):Piece(side){}
+    Pawn (Side side=white);
     virtual void covers(std::vector<Position> &list_covers, Board &board, Position &pos);
     virtual void moves(std::vector<Board> &list_board_moves, Board &board, Position &pos);
+
   private:
-    void covers_forward(std::vector<Position> &list_covers, Board &board, Position &pos);
+    void forward(std::vector<Position> &move_positions, Board &board, Position &pos);
+    void helper_moves(std::vector<Board> &list_board_moves, std::vector<Position> move_positions, Board &board, Position &pos);
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
