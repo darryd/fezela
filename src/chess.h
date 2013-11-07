@@ -59,6 +59,19 @@
 
 #endif
 
+#define PROMOTE_ROW 8
+
+#define PROMOTE_W_ROOK_POS Position(0, PROMOTE_ROW)
+#define PROMOTE_W_KNIGHT_POS Position(1, PROMOTE_ROW)
+#define PROMOTE_W_BISHOP_POS Position(2, PROMOTE_ROW)
+#define PROMOTE_W_QUEEN_POS Position(3, PROMOTE_ROW)
+
+#define PROMOTE_B_ROOK_POS Position (4, PROMOTE_ROW)
+#define PROMOTE_B_KNIGHT_POS Position (5, PROMOTE_ROW)
+#define PROMOTE_B_BISHOP_POS Position (6, PROMOTE_ROW)
+#define PROMOTE_B_QUEEN_POS Position (7, PROMOTE_ROW)
+
+#define NOWHERE Position (0, 9)
 
 enum Side { white, black };
 enum Kind { rook, knight, bishop, queen, king, pawn };
@@ -211,15 +224,14 @@ class Move {
     Position new_pos;
 
     bool is_castling;
+    bool is_promotion;
 
     Position old_castle_pos;
     Position new_castle_pos;
 
-    // Warning: Hard to read code appearing ahead. 
-    Move(Position old_pos_ = Position(0,0), Position new_pos_ = Position(0,0), bool is_castling_ = false, 
-    Position old_castle_pos_= Position(0,0), Position new_castle_pos_ = Position(0,0))
-    : old_pos(old_pos_), new_pos(new_pos_), is_castling(is_castling_), 
-    old_castle_pos(old_castle_pos_), new_castle_pos(new_castle_pos_) {}
+    Move() {
+      memset(this, 0, sizeof(Move));
+    }
 
 };
 
@@ -295,7 +307,7 @@ class Board {
 
     // Implied castling is when on the King is moved to indicate castling..
     // If the move is implied castling, the method will fill in the rest of 'move' structure
-    bool is_valid_move_allow_implied_castling(Move &move, Side side, bool update_move = false);
+    bool is_valid_move_allow_implied(Move &move, Side side, bool update_move = false);
 
     // Do not test for valid range for x and y.
     inline Piece *get_piece(Position &pos) {return _pieces[pos.x][pos.y];}
@@ -328,7 +340,7 @@ class Board {
 
 
   private: 
-    Piece * _pieces[TOTAL_ROWS][TOTAL_ROWS];
+    Piece * _pieces[TOTAL_ROWS][TOTAL_ROWS + 2]; // Plus 2 hidden rows for storing promotional pieces and such. 
 
     int _last_move_count;
     Move _lastMove;

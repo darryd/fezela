@@ -42,6 +42,18 @@ using namespace std;
 
 Board::Board() {
 
+  // Set promotional pieces
+
+  set_piece(&w_rook, PROMOTE_W_ROOK_POS);
+  set_piece(&w_knight, PROMOTE_W_KNIGHT_POS);
+  set_piece(&w_bishop, PROMOTE_W_BISHOP_POS);
+  set_piece(&w_queen, PROMOTE_W_QUEEN_POS);
+
+  set_piece(&b_rook, PROMOTE_B_ROOK_POS);
+  set_piece(&b_knight, PROMOTE_B_KNIGHT_POS);
+  set_piece(&b_bishop, PROMOTE_B_BISHOP_POS);
+  set_piece(&b_queen, PROMOTE_B_QUEEN_POS);
+
   clear();
 }
 
@@ -103,7 +115,7 @@ bool Board::is_mate(Side side) {
 /*--------------------------------------------------------------------------------------------------------
  * method Board::clear
  *
- * Clears all the pieces off the board.
+ * Clears all the pieces off the board (except for the hidden rows).
  *
  * ------------------------------------------------------------------------------------------------------*/
 void Board::clear() {
@@ -153,6 +165,7 @@ void Board::set() {
 
   for (int x=0; x<TOTAL_ROWS; x++)
     _pieces[x][6] = &b_pawn;
+
 }
 
 /*--------------------------------------------------------------------------------------------------------
@@ -385,7 +398,7 @@ bool Board::is_valid_move(Move &move, Side side) {
  *
  * ------------------------------------------------------------------------------------------------------*/
 
-bool Board::is_valid_move_allow_implied_castling(Move &move, Side side, bool update_move) {
+bool Board::is_valid_move_allow_implied(Move &move, Side side, bool update_move) {
 
   vector<Board> valid_boards = get_board_moves(side);
 

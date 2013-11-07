@@ -129,7 +129,11 @@ void Piece::default_moves(vector<Board> &list_boards, vector<Position> &list_cov
     if ( piece != NULL && piece->get_side() == _side )
       continue;
 
-    Move move(pos, *i);
+    //Move move(pos, *i);
+    Move move;
+
+    move.old_pos = pos;
+    move.new_pos = *i;
     
     copy_board.move(move);
 

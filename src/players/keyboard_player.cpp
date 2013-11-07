@@ -63,7 +63,7 @@ Move KeyboardPlayer::play_turn(const Board &board, Side side) {
 
     move = str_to_move(str_move);
 
-    bool is_valid = copy_board.is_valid_move_allow_implied_castling(move, side, true);
+    bool is_valid = copy_board.is_valid_move_allow_implied(move, side, true);
 #ifndef DEBUG_ALLOW_ILLEGAL_MOVES
     if ( !is_valid )
       cout << "Invalid move." << endl;
@@ -71,6 +71,9 @@ Move KeyboardPlayer::play_turn(const Board &board, Side side) {
 #endif
       break;
   }
+
+
+// TODO: Check if the move requires pawn promotion.
 
   cout << "\33[2J\33[;H";
 
