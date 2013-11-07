@@ -41,19 +41,6 @@ using namespace std;
  * ------------------------------------------------------------------------------------------------------*/
 
 Board::Board() {
-
-  // Set promotional pieces
-
-  set_piece(&w_rook, PROMOTE_W_ROOK_POS);
-  set_piece(&w_knight, PROMOTE_W_KNIGHT_POS);
-  set_piece(&w_bishop, PROMOTE_W_BISHOP_POS);
-  set_piece(&w_queen, PROMOTE_W_QUEEN_POS);
-
-  set_piece(&b_rook, PROMOTE_B_ROOK_POS);
-  set_piece(&b_knight, PROMOTE_B_KNIGHT_POS);
-  set_piece(&b_bishop, PROMOTE_B_BISHOP_POS);
-  set_piece(&b_queen, PROMOTE_B_QUEEN_POS);
-
   clear();
 }
 

@@ -59,20 +59,6 @@
 
 #endif
 
-#define PROMOTE_ROW 8
-
-#define PROMOTE_W_ROOK_POS Position(0, PROMOTE_ROW)
-#define PROMOTE_W_KNIGHT_POS Position(1, PROMOTE_ROW)
-#define PROMOTE_W_BISHOP_POS Position(2, PROMOTE_ROW)
-#define PROMOTE_W_QUEEN_POS Position(3, PROMOTE_ROW)
-
-#define PROMOTE_B_ROOK_POS Position (4, PROMOTE_ROW)
-#define PROMOTE_B_KNIGHT_POS Position (5, PROMOTE_ROW)
-#define PROMOTE_B_BISHOP_POS Position (6, PROMOTE_ROW)
-#define PROMOTE_B_QUEEN_POS Position (7, PROMOTE_ROW)
-
-#define NOWHERE Position (0, 9)
-
 enum Side { white, black };
 enum Kind { rook, knight, bishop, queen, king, pawn };
 enum RookKind { promoted, kings_rook, queens_rook };
@@ -224,12 +210,14 @@ class Move {
     Position new_pos;
 
     bool is_castling;
-    bool is_promotion;
+    bool is_en_passant
+
+    Piece *promotion;
 
     Position extra_old_pos;
     Position extra_new_pos;
 
-    Move(): is_castling(false), is_promotion(false) {}
+    Move(): is_castling(false), is_en_passant(false), promotion(NULL) {}
 
 };
 
@@ -338,7 +326,7 @@ class Board {
 
 
   private: 
-    Piece * _pieces[TOTAL_ROWS][TOTAL_ROWS + 2]; // Plus 2 hidden rows for storing promotional pieces and such. 
+    Piece * _pieces[TOTAL_ROWS][TOTAL_ROWS];
 
     int _last_move_count;
     Move _lastMove;
