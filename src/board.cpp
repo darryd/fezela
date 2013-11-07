@@ -374,3 +374,31 @@ bool Board::is_valid_move(Move &move, Side side) {
 
   return std::find(valid_boards.begin(), valid_boards.end(), candidate_board)!= valid_boards.end();
 }
+
+/*--------------------------------------------------------------------------------------------------------
+ *
+ * method is_valid_move_allow_implied_casting
+ *
+ *
+ * Implied castling is when the King is moved to indicate castling..
+ * If the move is implied castling, the method will fill in the rest of 'move' structure
+ *
+ * ------------------------------------------------------------------------------------------------------*/
+
+bool Board::is_valid_move_allow_implied_castling(Move &move, Side side) {
+
+  vector<Board> valid_boards = get_board_moves(side);
+
+  for (vector<Board>::iterator i = valid_boards.begin(); i != valid_boards.end(); ++i) {
+
+    Move valid_move = i->get_move();
+
+    if ( valid_move.old_pos == move.old_pos && valid_move.new_pos == move.new_pos ) {
+      
+      memcpy(&move , &valid_move, sizeof(Move));
+      return true;
+    }
+  }
+
+  return false;
+}

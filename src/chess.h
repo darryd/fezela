@@ -109,6 +109,9 @@ struct Position {
   Position operator+(const Position &rhs) const {
     return Position(x + rhs.x, y + rhs.y);
   }
+  bool operator==(const Position &rhs) const {
+    return x == rhs.x && y == rhs.y;
+  }
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -289,6 +292,10 @@ class Board {
     bool operator==(const Board& rhs) const;
 
     bool is_valid_move(Move &move, Side side);
+
+    // Implied castling is when on the King is moved to indicate castling..
+    // If the move is implied castling, the method will fill in the rest of 'move' structure
+    bool is_valid_move_allow_implied_castling(Move &move, Side side);
 
     // Do not test for valid range for x and y.
     inline Piece *get_piece(Position &pos) {return _pieces[pos.x][pos.y];}

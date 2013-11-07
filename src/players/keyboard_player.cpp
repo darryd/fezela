@@ -63,8 +63,9 @@ Move KeyboardPlayer::play_turn(const Board &board, Side side) {
 
     move = str_to_move(str_move);
 
+    bool is_valid = copy_board.is_valid_move_allow_implied_castling(move, side);
 #ifndef DEBUG_ALLOW_ILLEGAL_MOVES
-    if ( ! copy_board.is_valid_move(move, side) )
+    if ( !is_valid )
       cout << "Invalid move." << endl;
     else
 #endif
@@ -141,7 +142,6 @@ Move KeyboardPlayer::str_to_move(string str_move) {
   move.old_pos = str_to_position(str_move.substr(0, 2));
   move.new_pos = str_to_position(str_move.substr(3, 2));
 
-  // TODO: check if the user is castling.
   return move;
 }
 
