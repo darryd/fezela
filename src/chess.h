@@ -210,7 +210,7 @@ class Move {
     Position new_pos;
 
     bool is_castling;
-    bool is_en_passant
+    bool is_en_passant;
 
     Piece *promotion;
 

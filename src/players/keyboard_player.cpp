@@ -42,7 +42,7 @@ Move KeyboardPlayer::play_turn(const Board &board, Side side) {
   Move move;
   string str_move;
 
-  copy_board.print_castling_info();
+  //copy_board.print_castling_info();
 
   // Get a valid move.
   while (true) {

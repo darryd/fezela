@@ -34,7 +34,7 @@ int main() {
   KeyboardPlayer keyboard;
 
 
-  Game game(&keyboard, &keyboard);
+  Game game(&keyboard, &counting_and_checking_ai);
 
   game.play();
 }
