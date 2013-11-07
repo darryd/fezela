@@ -385,7 +385,7 @@ bool Board::is_valid_move(Move &move, Side side) {
  *
  * ------------------------------------------------------------------------------------------------------*/
 
-bool Board::is_valid_move_allow_implied_castling(Move &move, Side side) {
+bool Board::is_valid_move_allow_implied_castling(Move &move, Side side, bool update_move) {
 
   vector<Board> valid_boards = get_board_moves(side);
 
@@ -395,7 +395,9 @@ bool Board::is_valid_move_allow_implied_castling(Move &move, Side side) {
 
     if ( valid_move.old_pos == move.old_pos && valid_move.new_pos == move.new_pos ) {
       
-      memcpy(&move , &valid_move, sizeof(Move));
+      if ( update_move )
+	memcpy(&move , &valid_move, sizeof(Move));
+
       return true;
     }
   }
