@@ -29,6 +29,7 @@
 
 #include "../players.h"
 #include "str_utl.h"
+std::map<char, Piece*> get_promotional_pieces(Side side);
 
 #define VALID_LENGTH_MOVE_STR 5
 #define VALID_LENGTH_POS_STR 2
@@ -72,12 +73,40 @@ Move KeyboardPlayer::play_turn(const Board &board, Side side) {
       break;
   }
 
-
-// TODO: Check if the move requires pawn promotion.
+// Check if the move requires pawn promotion.
+  check_promotion(move, side);
 
   cout << "\33[2J\33[;H";
 
   return move;
+}
+
+/*--------------------------------------------------------------------------------------------------------
+ * Checks if the move is a pawn promotion. If it is, method asks user to pick a promotional piece.
+ * The 'move' struct is then modified accordingly.
+ * ------------------------------------------------------------------------------------------------------*/
+void KeyboardPlayer::check_promotion(Move &move, Side side) {
+
+  if ( !move.promotion )
+    return;
+
+  char ch;
+  map<char, Piece *>promotional_pieces = get_promotional_pieces(side);
+  
+  while (true) {
+
+    cout << "Promote pawn to [q,r,h,b]" << endl;
+    cin >> ch;
+
+    map<char, Piece*>::iterator it;
+    it = promotional_pieces.find(ch);
+
+    if ( it != promotional_pieces.end() ) {
+
+      move.promotion = promotional_pieces[ch]; 
+      break;
+    }
+  }
 }
 
 /*--------------------------------------------------------------------------------------------------------

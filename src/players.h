@@ -69,4 +69,5 @@ class KeyboardPlayer : public Player {
     Position str_to_position(std::string str_pos);
     bool is_valid_str_move(std::string str_move);
     bool is_valid_str_pos(std::string str_pos);
+    void check_promotion(Move &move, Side side); 
 };

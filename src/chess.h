@@ -218,6 +218,9 @@ struct Move {
 
     Position extra_old_pos;
     Position extra_new_pos;
+
+    Move():old_pos(Position(0,0)), new_pos(Position(0,0)), is_castling(false), is_en_passant(false),
+    promotion(NULL), extra_old_pos(Position(0,0)), extra_new_pos(Position(0,0)){}
 };
 
 /*---------------------------------------------------------------------------------------------------------

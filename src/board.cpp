@@ -115,9 +115,6 @@ void Board::clear() {
   _w_castling_info.clear();
   _b_castling_info.clear();
 
-
-  memset(&_last_move, 0, sizeof(Move));
-
 }
 
 /*--------------------------------------------------------------------------------------------------------
