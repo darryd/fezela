@@ -115,6 +115,9 @@ void Board::clear() {
   _w_castling_info.clear();
   _b_castling_info.clear();
 
+
+  memset(_last_move, 0, sizeof(Move));
+
 }
 
 /*--------------------------------------------------------------------------------------------------------
@@ -254,7 +257,7 @@ void Board::move(Move &move) {
 
   Piece *piece;
 
-  _lastMove = move;
+  _last_move = move;
 
   piece = get_piece(move.old_pos);
   if ( piece == NULL)

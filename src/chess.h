@@ -201,13 +201,13 @@ class Pawn : public Piece {
   private:
     void forward(std::vector<Position> &move_positions, Board &board, Position &pos);
     void helper_moves(std::vector<Board> &list_board_moves, std::vector<Position> move_positions, Board &board, Position &pos);
+    void en_passant(std::vector<Board> &board_moves, Board &board, Position &pos);
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
 
-class Move {
+struct Move {
 
-  public: 
     Position old_pos;
     Position new_pos;
 
@@ -218,9 +218,6 @@ class Move {
 
     Position extra_old_pos;
     Position extra_new_pos;
-
-    Move(): is_castling(false), is_en_passant(false), promotion(NULL) {}
-
 };
 
 /*---------------------------------------------------------------------------------------------------------
@@ -271,7 +268,7 @@ class Board {
     void print();
     void print_check(Side side);
 
-    Move get_move() { return _lastMove; }
+    Move get_move() { return _last_move; }
 
     std::vector<Board> get_board_moves(Side side);
 
@@ -331,7 +328,7 @@ class Board {
     Piece * _pieces[TOTAL_ROWS][TOTAL_ROWS];
 
     int _last_move_count;
-    Move _lastMove;
+    Move _last_move;
     CastlingInfo _w_castling_info;
     CastlingInfo _b_castling_info;
 
