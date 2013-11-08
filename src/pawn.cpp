@@ -26,6 +26,8 @@
  * ------------------------------------------------------------------------------------------------------*/
 
 #include "chess.h"
+#include <stdlib.h>
+
 using namespace std;
 
 map<char, Piece*> get_promotional_pieces(Side side);
@@ -81,6 +83,7 @@ void Pawn::moves(std::vector<Board> &list_board_moves, Board &board, Position &p
 
 //  default_moves(list_board_moves, move_positions, board, pos);
    helper_moves(list_board_moves, move_positions, board, pos);
+   en_passant(list_board_moves, board, pos);
 }
 
 /*--------------------------------------------------------------------------------------------------------
@@ -89,7 +92,6 @@ void Pawn::moves(std::vector<Board> &list_board_moves, Board &board, Position &p
  * This method just looks to see if the pawn can move forward. If it can it adds the forward moves to the
  * vector move_positions. This is helper method for the moves method.
  *
- * TODO: en passent
  *-------------------------------------------------------------------------------------------------------*/
 void Pawn::forward(vector<Position> &move_positions, Board &board, Position &pos) {
 
@@ -169,3 +171,49 @@ void Pawn::helper_moves(std::vector<Board> &list_board_moves, vector<Position> m
     }
   }
 }
+
+/*--------------------------------------------------------------------------------------------------------
+ *  method Pawn::en_passant
+ *
+ *  checks if for the en_passant move
+ *
+ *-------------------------------------------------------------------------------------------------------*/
+void Pawn::en_passant(std::vector<Board> &board_moves, Board &board, Position &pos) {
+
+  int dir = Utl::direction(get_side());
+  Board copy_board(board);
+  
+  Move last_move = copy_board.get_move();
+  
+  if (last_move.new_pos.y != pos.y) 
+    return;
+
+  Piece *piece = copy_board.get_piece(last_move.new_pos);
+
+  if ( piece == NULL || !(piece->get_kind() == pawn && piece->get_side() != get_side()) ) 
+    return;
+
+  if ( abs ( last_move.new_pos.x - pos.x ) != 1 )
+    return;
+
+  if ( abs ( last_move.new_pos.y - last_move.old_pos.y ) != 2 )
+    return;
+
+  // En passant is possible!
+
+  Move en_passant_move;
+  
+  en_passant_move.old_pos = pos;
+  en_passant_move.new_pos.x = last_move.new_pos.x;
+  en_passant_move.new_pos.y = last_move.new_pos.y + dir;
+  en_passant_move.is_en_passant = true;
+  
+  copy_board.move(en_passant_move);
+  if ( copy_board.is_in_check(get_side()) )
+    return; // illegal move!
+
+  board_moves.push_back(copy_board);
+
+}
+
+

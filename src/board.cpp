@@ -289,7 +289,15 @@ void Board::move(Move &move) {
     set_piece(move.promotion, move.new_pos);
 
   //--------------- en passant
-  // coming soon........
+  if (move.is_en_passant) {
+
+    piece = get_piece(move.new_pos);
+    if ( piece == NULL ) 
+      return;
+
+    int dir = -1 * Utl::direction(piece->get_side());
+    set_piece(NULL, move.new_pos.x, move.new_pos.y + dir);
+  }
 }
 
 /*--------------------------------------------------------------------------------------------------------
