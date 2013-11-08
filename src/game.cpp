@@ -67,5 +67,6 @@ void Game::play() {
 
     _turn = Utl::opposite(_turn);
 
+    //sleep(1);
   } while ( ! _board.is_game_over(_turn) );
 }

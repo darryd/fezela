@@ -142,11 +142,12 @@ void Board::set() {
     _pieces[x][1] = &w_pawn;
 
   // Set black side
+  
   _pieces[0][7] = &b_q_rook;
   _pieces[1][7] = &b_knight;
   _pieces[2][7] = &b_bishop;
-  _pieces[3][7] = &b_queen;
-  _pieces[4][7] = &b_king;
+  _pieces[3][7] = &b_queen; 
+  _pieces[4][7] = &b_king; 
   _pieces[5][7] = &b_bishop;
   _pieces[6][7] = &b_knight;
   _pieces[7][7] = &b_k_rook;

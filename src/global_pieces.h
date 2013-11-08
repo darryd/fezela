@@ -20,7 +20,7 @@
 */
 #pragma once
 
-#include <vector>
+#include <map>
 
 Rook w_rook;
 Rook w_k_rook(white, kings_rook);
@@ -45,25 +45,24 @@ King b_king(black);
 Pawn w_pawn;
 Pawn b_pawn(black);
 
-std::vector<Piece*> get_promotional_pieces(Side side) {
+std::map<char, Piece*> get_promotional_pieces(Side side) {
 
-  std::vector<Piece*> promotional_pieces;
+  std::map<char, Piece*> promotional_pieces;
 
   if ( side == white ) {
 
-    promotional_pieces.push_back(&w_rook);
-    promotional_pieces.push_back(&w_knight);
-    promotional_pieces.push_back(&w_bishop);
-    promotional_pieces.push_back(&w_queen);
+    promotional_pieces['r'] = &w_rook;
+    promotional_pieces['h'] = &w_knight;
+    promotional_pieces['b'] = &w_bishop;
+    promotional_pieces['q'] = &w_queen;
 
   }
   else {
 
-    promotional_pieces.push_back(&b_rook);
-    promotional_pieces.push_back(&b_knight);
-    promotional_pieces.push_back(&b_bishop);
-    promotional_pieces.push_back(&b_queen);
-
+    promotional_pieces['r'] = &b_rook;
+    promotional_pieces['h'] = &b_knight;
+    promotional_pieces['b'] = &b_bishop;
+    promotional_pieces['q'] = &b_queen;
   }
 
   return promotional_pieces;

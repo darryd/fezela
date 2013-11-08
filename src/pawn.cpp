@@ -28,7 +28,7 @@
 #include "chess.h"
 using namespace std;
 
-vector<Piece*> get_promotional_pieces(Side side);
+map<char, Piece*> get_promotional_pieces(Side side);
 
 Pawn::Pawn(Side side):Piece(side) {}
 
@@ -98,11 +98,13 @@ void Pawn::forward(vector<Position> &move_positions, Board &board, Position &pos
 
   Position here = pos + Position(0, dir);
 
-  if ( !Utl::is_on_board(here.x, here.y) ) 
+  if ( !Utl::is_on_board(here.x, here.y) ) {
     return; // Pawn is at end of board. Cannot advance.
+  }
 
-  if ( board.get_piece(here.x, here.y) != NULL )
+  if ( board.get_piece(here.x, here.y) != NULL ) {
     return; // Pawn is blocked by a piece. Cannot advance.
+  }
 
   move_positions.push_back(here);
 
@@ -129,8 +131,8 @@ void Pawn::forward(vector<Position> &move_positions, Board &board, Position &pos
  * -----------------------------------------------------------------------------------------------------*/
 void Pawn::helper_moves(std::vector<Board> &list_board_moves, vector<Position> move_positions, Board &board, Position &pos) {
 
-  int last_row = get_side() == white ? 7 : 0;
-
+  int last_row = ( get_side() == white ? 7 : 0 );
+   
   for (vector<Position>::iterator i = move_positions.begin(); i != move_positions.end(); ++i) {
 
     Position new_pos = *i;
@@ -151,14 +153,15 @@ void Pawn::helper_moves(std::vector<Board> &list_board_moves, vector<Position> m
 
       // Pawn promotion! 
 
-      vector<Piece*> promotional_pieces = get_promotional_pieces(get_side());
+      map<char, Piece*> promotional_pieces = get_promotional_pieces(get_side());
       
-      for (vector<Piece*>::iterator i = promotional_pieces.begin(); i != promotional_pieces.end(); ++i) {
+      for (map<char, Piece*>::iterator i = promotional_pieces.begin(); i != promotional_pieces.end(); ++i) {
 
 	Board copy_board(board);
 	Move promote_move(move);
 
-	promote_move.promotion = *i;
+	promote_move.promotion = i->second;
+
 	copy_board.move(promote_move);
 
 	list_board_moves.push_back(copy_board);
