@@ -65,7 +65,7 @@ enum RookKind { promoted, kings_rook, queens_rook };
 
 /*--------------------------------------------------------------------------------------------------------*/
 
-class Position;
+struct Position;
 
 struct Utl {
 
@@ -348,15 +348,26 @@ class Player {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
+class Subscriber {
+  public:
+    virtual void notification(const Board &board) = 0;
+};
+
+/*--------------------------------------------------------------------------------------------------------*/
+
 class Game {
 
   public:
     Game(Player *white_player, Player *black_player);
     void play();
+    void subscribe(Subscriber *subscriber);
+    void unsubscribe(Subscriber *subscriber); 
+    void notify(Board board);
   private:
     Board _board;
     std::map<Side, Player*> _players;
     Side _turn;
+    std::vector<Subscriber> subscribers;
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
