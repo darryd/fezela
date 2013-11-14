@@ -107,6 +107,11 @@ void *do_notify(void *ptr) {
 
     SubscriberData *data = (SubscriberData *) malloc(sizeof(SubscriberData));
 
+    if (data == NULL) {
+      cerr << "Error no memory." << endl;
+      return NULL;
+    }
+
     data->subscriber = *i;
     data->board = n_data->board;
 
@@ -121,6 +126,11 @@ void *do_notify(void *ptr) {
 void Game::notify (Board board) {
 
   NotifyData *n_data = (NotifyData *) malloc (sizeof (NotifyData));
+
+  if (n_data == NULL) {
+    cerr << "Error no memory." << endl;
+    return;
+  }
 
   n_data->ptr_game = this;
   n_data->board = board;
