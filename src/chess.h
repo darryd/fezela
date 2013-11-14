@@ -368,6 +368,7 @@ class Game {
     std::map<Side, Player*> _players;
     Side _turn;
     std::vector<Subscriber*> _subscribers;
+    friend void*do_notify(void *ptr);
 };
 
 /*--------------------------------------------------------------------------------------------------------*/

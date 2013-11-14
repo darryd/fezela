@@ -31,11 +31,14 @@
 
 using namespace std;
 
-struct NotifyData {
-
+struct SubscriberData {
   Subscriber *subscriber;
   Board board;
+};
 
+struct NotifyData {
+  Game *ptr_game;
+  Board board;
 };
 
 Game::Game(Player *white_player, Player *black_player): _turn(white) {
@@ -85,9 +88,9 @@ void Game::subscribe(Subscriber *subscriber) {
   _subscribers.push_back(subscriber);
 }
 
-void *do_notify(void *ptr) {
+void *do_notify_subscriber(void *ptr) {
 
-  NotifyData *data = (NotifyData *) ptr;
+  SubscriberData *data = (SubscriberData *) ptr;
 
   data->subscriber->notification(data->board);
 
@@ -95,14 +98,34 @@ void *do_notify(void *ptr) {
   return NULL;
 }
 
-void Game::notify (Board board) {
 
-  for (vector<Subscriber*>::iterator i = _subscribers.begin(); i != _subscribers.end(); ++i) {
+void *do_notify(void *ptr) {
 
-    NotifyData *data = (NotifyData *) malloc(sizeof(NotifyData));
+  NotifyData *n_data = (NotifyData *) ptr;
+
+  for (vector<Subscriber*>::iterator i = n_data->ptr_game->_subscribers.begin(); i != n_data->ptr_game->_subscribers.end(); ++i) {
+
+    SubscriberData *data = (SubscriberData *) malloc(sizeof(SubscriberData));
+
+    data->subscriber = *i;
+    data->board = n_data->board;
 
     pthread_t thread;
-    pthread_create(&thread, NULL, do_notify, (void *) data);
-
+    pthread_create(&thread, NULL, do_notify_subscriber, (void *) data);
   }
+
+  free(ptr);
+  return NULL;
+}
+
+void Game::notify (Board board) {
+
+  NotifyData *n_data = (NotifyData *) malloc (sizeof (NotifyData));
+
+  n_data->ptr_game = this;
+  n_data->board = board;
+
+
+  pthread_t thread;
+  pthread_create(&thread, NULL, do_notify, (void *) n_data);
 }
