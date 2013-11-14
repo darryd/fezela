@@ -350,7 +350,7 @@ class Player {
 
 class Subscriber {
   public:
-    virtual void notification(const Board &board) = 0;
+    virtual void notification(Board board) = 0;
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -367,7 +367,7 @@ class Game {
     Board _board;
     std::map<Side, Player*> _players;
     Side _turn;
-    std::vector<Subscriber> subscribers;
+    std::vector<Subscriber*> _subscribers;
 };
 
 /*--------------------------------------------------------------------------------------------------------*/

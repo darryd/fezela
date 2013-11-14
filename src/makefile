@@ -4,7 +4,7 @@ CC = g++
 
 DEBUG =
 
-CFLAGS = $(DEBUG) -c -Wall -g
+CFLAGS = $(DEBUG) -c -Wall -g -pthread
 
 PLAYER_O_FILES = random_ai.o simply_counting_ai.o counting_and_checking_ai.o \
 		 keyboard_player.o str_utl.o
@@ -13,7 +13,7 @@ all: fezela
 
 fezela: castling_info.o game.o global_pieces.h players.h chess.h main.o piece.o \
   rook.o knight.o bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) 
-	$(CC) $(DEBUG) -g -Wall castling_info.o game.o main.o piece.o rook.o knight.o \
+	$(CC) $(DEBUG) -pthread -g -Wall castling_info.o game.o main.o piece.o rook.o knight.o \
 	  bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) -o fezela
 
 castling_info: chess.h castling_info.o
