@@ -394,12 +394,20 @@ bool Board::is_valid_move(Move &move, Side side) {
 
 /*--------------------------------------------------------------------------------------------------------
  *
- * method is_valid_move_allow_implied_casting
+ * method is_valid_move_allow_implied
  *
+ * Primarily this method is intended to be used when getting a move from a user. For example, to castle, 
+ * the user just moves the king. The user doesn't move rook, therefore, this makes the move implied. 
  *
  * Implied castling is when the King is moved to indicate castling..
- * If the move is implied castling, the method will fill in the rest of 'move' structure
+ * If the move is implied castling, the method will fill in the rest of 'move' structure (if 'update_move is
+ * set to true).
  *
+ * If the move is implied (and 'update_move' is set to true), the Move structure will indicate if it is 
+ * implied by the following:
+ *    - In castling: move.is_castling will be true.
+ *    - In promotion: move.promotion will not be NULL.
+ *    - In en passant: move.is_en_passant will be true.
  * ------------------------------------------------------------------------------------------------------*/
 
 bool Board::is_valid_move_allow_implied(Move &move, Side side, bool update_move) {
