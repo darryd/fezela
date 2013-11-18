@@ -12,9 +12,12 @@ PLAYER_O_FILES = random_ai.o simply_counting_ai.o counting_and_checking_ai.o \
 all: fezela
 
 fezela: castling_info.o game.o global_pieces.h players.h chess.h main.o piece.o \
-  rook.o knight.o bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) 
-	$(CC) $(DEBUG) -pthread -g -Wall castling_info.o game.o main.o piece.o rook.o knight.o \
+  rook.o knight.o bishop.o queen.o king.o pawn.o board.o utl.o subscriber.o $(PLAYER_O_FILES) 
+	$(CC) $(DEBUG) -pthread -g -Wall subscriber.o castling_info.o game.o main.o piece.o rook.o knight.o \
 	  bishop.o queen.o king.o pawn.o board.o utl.o $(PLAYER_O_FILES) -o fezela
+
+subscriber: chess.h subscriber.o
+	$(CC) $(CFLAGS) subscriber.cpp
 
 castling_info: chess.h castling_info.o
 	$(CC) $(CFLAGS) castling_info.cpp

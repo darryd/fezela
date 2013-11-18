@@ -32,6 +32,7 @@
 #include <map>
 #include <string>
 #include <string.h>
+#include <pthread.h>
 
 #if 0 
 #define DEBUG_ALLOW_ILLEGAL_MOVES // For testing, if you want to be able to move pieces anywhere.
@@ -350,7 +351,15 @@ class Player {
 
 class Subscriber {
   public:
-    virtual void notification(Board board) = 0;
+    Subscriber();
+    void notification(Board board, int seq_no);
+  protected:
+    virtual void do_work(Board board) = 0;
+  private:
+    void process_waiting_room();
+    std::map<int, Board> _waiting_room;
+    int _seq_no;
+    pthread_mutex_t _mutex;
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
@@ -362,7 +371,7 @@ class Game {
     void play();
     void subscribe(Subscriber *subscriber);
     void unsubscribe(Subscriber *subscriber); 
-    void notify(Board board);
+    void notify(Board board, int seq_no);
   private:
     Board _board;
     std::map<Side, Player*> _players;

@@ -34,11 +34,13 @@ using namespace std;
 struct SubscriberData {
   Subscriber *subscriber;
   Board board;
+  int seq_no;
 };
 
 struct NotifyData {
   Game *ptr_game;
   Board board;
+  int seq_no;
 };
 
 Game::Game(Player *white_player, Player *black_player): _turn(white) {
@@ -50,9 +52,13 @@ Game::Game(Player *white_player, Player *black_player): _turn(white) {
 
   cout << "\33[2J\33[;H";
   _board.print();
+  notify(_board, 0);
 }
 
 void Game::play() {
+
+
+  int seq_num = 1;
 
   do {
 
@@ -76,7 +82,7 @@ void Game::play() {
     cout << "\33[;H";
     _board.print();
     cout << "                               " << endl;
-    notify(_board);
+    notify(_board, seq_num++ );
 
     _turn = Utl::opposite(_turn);
 
@@ -92,7 +98,7 @@ void *do_notify_subscriber(void *ptr) {
 
   SubscriberData *data = (SubscriberData *) ptr;
 
-  data->subscriber->notification(data->board);
+  data->subscriber->notification(data->board, data->seq_no);
 
   free(ptr);
   return NULL;
@@ -114,6 +120,7 @@ void *do_notify(void *ptr) {
 
     data->subscriber = *i;
     data->board = n_data->board;
+    data->seq_no = n_data->seq_no;
 
     pthread_t thread;
     pthread_create(&thread, NULL, do_notify_subscriber, (void *) data);
@@ -123,7 +130,7 @@ void *do_notify(void *ptr) {
   return NULL;
 }
 
-void Game::notify (Board board) {
+void Game::notify (Board board, int seq_no) {
 
   NotifyData *n_data = (NotifyData *) malloc (sizeof (NotifyData));
 
@@ -134,6 +141,7 @@ void Game::notify (Board board) {
 
   n_data->ptr_game = this;
   n_data->board = board;
+  n_data->seq_no = seq_no;
 
 
   pthread_t thread;

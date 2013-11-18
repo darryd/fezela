@@ -102,7 +102,7 @@ bool Board::is_mate(Side side) {
 /*--------------------------------------------------------------------------------------------------------
  * method Board::clear
  *
- * Clears all the pieces off the board (except for the hidden rows).
+ * Clears all the pieces off the board.
  *
  * ------------------------------------------------------------------------------------------------------*/
 void Board::clear() {
