@@ -221,6 +221,7 @@ void Board::print_check(Side side) {
  * method Board::update_castling_info
  *
  * This is to keep track if king or a rook's king or queen's rook moved in the game.
+ * This is method is called by Board::move() when a piece moves.
  *
  * ------------------------------------------------------------------------------------------------------*/
 void Board::update_castling_info(Piece *piece) {
