@@ -29,13 +29,15 @@ Subscriber::Subscriber():_seq_no(0) {
   pthread_mutex_init(&_mutex, NULL);
 }
 
+/*--------------------------------------------------------------------------------------------------------*/
+
 void Subscriber::notification(Board board, int seq_no) {
 
   pthread_mutex_lock(&_mutex);
 
   if ( _seq_no == seq_no ) {
-    _seq_no++;
     do_work(board);
+    _seq_no++;
     process_waiting_room();
   }
   else {
@@ -44,6 +46,8 @@ void Subscriber::notification(Board board, int seq_no) {
 
   pthread_mutex_unlock(&_mutex);
 }
+
+/*--------------------------------------------------------------------------------------------------------*/
 
 void Subscriber::process_waiting_room() {
 
