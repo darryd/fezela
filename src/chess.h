@@ -360,9 +360,9 @@ struct GameData {
 class Subscriber {
   public:
     Subscriber();
-    void notification(GameData data, int seq_no);
+    void notification(GameData game_data, int seq_no);
   protected:
-    virtual void do_work(GameData data) = 0;
+    virtual void do_work(GameData game_data) = 0;
   private:
     void process_waiting_room();
     std::map<int, GameData> _waiting_room;

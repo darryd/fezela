@@ -52,7 +52,7 @@ Game::Game(Player *white_player, Player *black_player): _turn(white) {
 
   cout << "\33[2J\33[;H";
   _board.print();
-  //notify(_board, 0);
+  notify(_board, 0);
 }
 
 void Game::play() {
@@ -82,7 +82,7 @@ void Game::play() {
     cout << "\33[;H";
     _board.print();
     cout << "                               " << endl;
-    //notify(_board, seq_num++ );
+    notify(_board, seq_num++ );
 
     _turn = Utl::opposite(_turn);
 

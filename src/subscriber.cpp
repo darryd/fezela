@@ -31,17 +31,17 @@ Subscriber::Subscriber():_seq_no(0) {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
-void Subscriber::notification(GameData data, int seq_no) {
+void Subscriber::notification(GameData game_data, int seq_no) {
 
   pthread_mutex_lock(&_mutex);
 
   if ( _seq_no == seq_no ) {
-    do_work(data);
+    do_work(game_data);
     _seq_no++;
     process_waiting_room();
   }
   else {
-    _waiting_room[seq_no] = data;
+    _waiting_room[seq_no] = game_data;
   }
 
   pthread_mutex_unlock(&_mutex);
