@@ -357,6 +357,8 @@ struct GameData {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
+// This is experimental.
+
 class Subscriber {
   public:
     Subscriber();

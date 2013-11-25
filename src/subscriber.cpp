@@ -20,6 +20,8 @@
 
 */
 
+// This is experimental.
+
 #include "chess.h"
 
 
