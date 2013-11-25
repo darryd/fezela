@@ -31,17 +31,17 @@ Subscriber::Subscriber():_seq_no(0) {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
-void Subscriber::notification(Board board, int seq_no) {
+void Subscriber::notification(GameData data, int seq_no) {
 
   pthread_mutex_lock(&_mutex);
 
   if ( _seq_no == seq_no ) {
-    do_work(board);
+    do_work(data);
     _seq_no++;
     process_waiting_room();
   }
   else {
-    _waiting_room[seq_no] = board;
+    _waiting_room[seq_no] = data;
   }
 
   pthread_mutex_unlock(&_mutex);
@@ -51,7 +51,7 @@ void Subscriber::notification(Board board, int seq_no) {
 
 void Subscriber::process_waiting_room() {
 
-  map<int, Board>::iterator it;
+  map<int, GameData>::iterator it;
 
   while ( (it = _waiting_room.find(_seq_no)) != _waiting_room.end() ) {
 

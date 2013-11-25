@@ -349,15 +349,23 @@ class Player {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
+struct GameData {
+
+  Board board;
+  int seq_no; 
+};
+
+/*--------------------------------------------------------------------------------------------------------*/
+
 class Subscriber {
   public:
     Subscriber();
-    void notification(Board board, int seq_no);
+    void notification(GameData data, int seq_no);
   protected:
-    virtual void do_work(Board board) = 0;
+    virtual void do_work(GameData data) = 0;
   private:
     void process_waiting_room();
-    std::map<int, Board> _waiting_room;
+    std::map<int, GameData> _waiting_room;
     int _seq_no;
     pthread_mutex_t _mutex;
 };
