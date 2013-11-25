@@ -90,6 +90,7 @@ void Game::play() {
   } while ( ! _board.is_game_over(_turn) );
 }
 
+// Experimental
 void Game::subscribe(Subscriber *subscriber) {
   _subscribers.push_back(subscriber);
 }
@@ -104,7 +105,7 @@ void *do_notify_subscriber(void *ptr) {
   return NULL;
 }
 
-
+// Experimental
 void *do_notify(void *ptr) {
 
   NotifyData *n_data = (NotifyData *) ptr;
@@ -130,6 +131,7 @@ void *do_notify(void *ptr) {
   return NULL;
 }
 
+// Experimental
 void Game::notify (Board board, int seq_no) {
 
   NotifyData *n_data = (NotifyData *) malloc (sizeof (NotifyData));

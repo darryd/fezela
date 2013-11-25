@@ -379,15 +379,15 @@ class Game {
   public:
     Game(Player *white_player, Player *black_player);
     void play();
-    void subscribe(Subscriber *subscriber);
-    void unsubscribe(Subscriber *subscriber); 
-    void notify(Board board, int seq_no);
+    void subscribe(Subscriber *subscriber);  // Experimental
+    void unsubscribe(Subscriber *subscriber); // Experimental
+    void notify(Board board, int seq_no); // Experimental
   private:
     Board _board;
     std::map<Side, Player*> _players;
     Side _turn;
-    std::vector<Subscriber*> _subscribers;
-    friend void*do_notify(void *ptr);
+    std::vector<Subscriber*> _subscribers; // Experimental
+    friend void*do_notify(void *ptr); // Experimental
 };
 
 /*--------------------------------------------------------------------------------------------------------*/
