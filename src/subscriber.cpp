@@ -66,3 +66,4 @@ void Subscriber::process_waiting_room() {
   }
 
 }
+
