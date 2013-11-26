@@ -52,7 +52,7 @@ Game::Game(Player *white_player, Player *black_player): _turn(white) {
 
   cout << "\33[2J\33[;H";
   _board.print();
-  notify(_board, 0);
+  //notify(_board, 0);
 }
 
 void Game::play() {
@@ -82,7 +82,7 @@ void Game::play() {
     cout << "\33[;H";
     _board.print();
     cout << "                               " << endl;
-    notify(_board, seq_num++ );
+    //notify(_board, seq_num++ );
 
     _turn = Utl::opposite(_turn);
 
@@ -133,7 +133,7 @@ void *do_notify(void *ptr) {
 
 // Experimental
 void Game::notify (Board board, int seq_no) {
-
+/*
   NotifyData *n_data = (NotifyData *) malloc (sizeof (NotifyData));
 
   if (n_data == NULL) {
@@ -149,4 +149,5 @@ void Game::notify (Board board, int seq_no) {
 
   pthread_t thread;
   pthread_create(&thread, NULL, do_notify, (void *) n_data);
+  */
 }
