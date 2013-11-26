@@ -33,6 +33,7 @@ Subscriber::Subscriber():_seq_no(0) {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
+// This is experimental.
 void Subscriber::notification(GameData game_data, int seq_no) {
 
   pthread_mutex_lock(&_mutex);
@@ -51,6 +52,7 @@ void Subscriber::notification(GameData game_data, int seq_no) {
 
 /*--------------------------------------------------------------------------------------------------------*/
 
+// This is experimental.
 void Subscriber::process_waiting_room() {
 
   map<int, GameData>::iterator it;
