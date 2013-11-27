@@ -43,6 +43,8 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
 
   Move move;
 
-  return move;
+  throw "not yet implemented.";
+
+  return move; 
 
 }

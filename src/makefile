@@ -21,7 +21,8 @@ MODULES = \
       build/subscriber.o \
       build/utl.o \
       build/alpha_score.o \
-      build/look_deeper_ai.o
+      build/look_deeper_ai.o \
+      build/candidates.o
 
 all: build fezela
 
@@ -37,4 +38,3 @@ fezela: $(MODULES)
 clean:
 	rm -rf build
 	rm -rf fezela
-

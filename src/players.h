@@ -31,6 +31,8 @@
 #include "chess.h"
 #include "score.h"
 
+/*-------------------------------------------------------------------------------------------------*/
+
 class RandomAI : public Player {
 
   public:
@@ -61,6 +63,8 @@ class CountingAndCheckingAI : public Player {
     std::map<Kind, int > values;
 };
 
+/*-------------------------------------------------------------------------------------------------*/
+
 class KeyboardPlayer : public Player {
 
   public:
@@ -73,6 +77,30 @@ class KeyboardPlayer : public Player {
     void check_promotion(Move &move, Side side); 
 };
 
+/*-------------------------------------------------------------------------------------------------*/
+
+#define DEFAULT_MAX_CANDIDATES 5
+
+struct BoardScore {
+  Board board;
+  int score;
+};
+  
+class Candidates {
+
+  public:
+    Candidates(size_t max_candidates = DEFAULT_MAX_CANDIDATES, bool get_max = true);
+    ~Candidates();
+    Board select();
+    void add(Board &board, int score);
+  private:
+    typedef int (* compare_function)(int a, int b);
+    size_t _total_candidates;
+    size_t _max_candidates;
+    compare_function _cmp_f;
+    BoardScore *_candidates;
+};
+
 class LookDeeperAI : public Player {
 
   public:
@@ -80,10 +108,12 @@ class LookDeeperAI : public Player {
     ~LookDeeperAI();
     virtual Move play_turn(const Board &board, Side side);
   private:
-    typedef bool (* compare)(int a, int b);
     int _width;
     int _depth;
     ScoreKeeper *_score_keeper;
     bool _need_to_delete_score_keeper;
     Board r_get_best_score(Board board, int current_depth, bool isOurSide);
 };
+
+/*-------------------------------------------------------------------------------------------------*/
+
