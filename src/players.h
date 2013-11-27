@@ -29,6 +29,7 @@
 #pragma once
 
 #include "chess.h"
+#include "score.h"
 
 class RandomAI : public Player {
 
@@ -70,4 +71,19 @@ class KeyboardPlayer : public Player {
     bool is_valid_str_move(std::string str_move);
     bool is_valid_str_pos(std::string str_pos);
     void check_promotion(Move &move, Side side); 
+};
+
+class LookDeeper : public Player {
+
+  public:
+    LookDeeper(ScoreKeeper *score_keeper = NULL, int width=1, int depth=1);
+    ~LookDeeper();
+    virtual Move play_turn(const Board &board, Side side);
+  private:
+    typedef bool (* compare)(int a, int b);
+    int _width;
+    int _depth;
+    ScoreKeeper *_score_keeper;
+    bool _need_to_delete_score_keeper;
+    Board r_get_best_score(Board board, int current_depth, bool isOurSide);
 };
