@@ -94,10 +94,9 @@ class Candidates {
     Board select();
     void add(Board &board, int score);
   private:
-    typedef int (* compare_function)(int a, int b);
+    int (* _compare_f)(int a, int b);
     size_t _total_candidates;
     size_t _max_candidates;
-    compare_function _cmp_f;
     BoardScore *_candidates;
 };
 

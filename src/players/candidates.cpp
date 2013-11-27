@@ -35,7 +35,7 @@ Candidates::Candidates(size_t max_candidates, bool get_max) :_total_candidates(0
     exit(1);
   }
 
-  _cmp_f = get_max ? Utl::max : Utl::min;
+  _compare_f = get_max ? Utl::max : Utl::min;
 }
 
 Candidates::~Candidates() {
@@ -52,7 +52,7 @@ Board Candidates::select() {
     selected = _candidates[0];
 
   for (size_t i=0; i < _total_candidates; i++) 
-    if ( _cmp_f ( _candidates->score, selected.score) == _candidates->score )
+    if ( _compare_f ( _candidates->score, selected.score) == _candidates->score )
       selected = _candidates[i];
 
   return selected.board;
@@ -70,7 +70,7 @@ void Candidates::add(Board &board, int score) {
   else {
 
     for (size_t i = 0; i < _max_candidates; i++)
-      if ( _cmp_f(score, _candidates[i].score) == score ) {
+      if ( _compare_f(score, _candidates[i].score) == score ) {
 	
 	_candidates[i].board = board;
 	_candidates[i].score = score;
