@@ -58,7 +58,7 @@ Game::Game(Player *white_player, Player *black_player): _turn(white) {
 void Game::play() {
 
 
-  int seq_num = 1;
+  //int seq_num = 1;
 
   do {
 

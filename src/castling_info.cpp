@@ -125,7 +125,7 @@ bool CastlingInfo::is_clear_between_king_and_rook(Board &board, Side side, RookK
   Position king_pos = get_king_before_castling_position(side);
   Position rook_pos = get_rook_before_castling_position(side, rook_kind);
 
-  int dir = king_pos.x < rook_pos.x ? 1 : -1; // Direction going from king to rook.
+  //int dir = king_pos.x < rook_pos.x ? 1 : -1; // Direction going from king to rook.
 
   // Check all squares between the king and the rook for the presence of a piece.
   int start, end;

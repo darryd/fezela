@@ -73,11 +73,11 @@ class KeyboardPlayer : public Player {
     void check_promotion(Move &move, Side side); 
 };
 
-class LookDeeper : public Player {
+class LookDeeperAI : public Player {
 
   public:
-    LookDeeper(ScoreKeeper *score_keeper = NULL, int width=1, int depth=1);
-    ~LookDeeper();
+    LookDeeperAI(ScoreKeeper *score_keeper = NULL, int width=1, int depth=1);
+    ~LookDeeperAI();
     virtual Move play_turn(const Board &board, Side side);
   private:
     typedef bool (* compare)(int a, int b);
