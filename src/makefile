@@ -19,14 +19,16 @@ MODULES = \
       build/simply_counting_ai.o \
       build/str_utl.o \
       build/subscriber.o \
-      build/utl.o 
+      build/utl.o \
+      build/alpha_score.o \
+      build/look_deeper.o
 
 all: build fezela
 
 build:
 	mkdir -p build
 
-build/%.o: %.cpp chess.h
+build/%.o: %.cpp chess.h players.h score.h
 	$(CXX) $(CFLAGS) $(LIBS) -c $< -o $@
 
 fezela: $(MODULES)
