@@ -21,8 +21,21 @@
 */
 #include "../chess.h"
 #include "../score.h"
+#include <climits>
+
+#define CHECK_MATE_SCORE INT_MAX
+#define STALE_MATE_SCORE -1000000
+
 
 using namespace std; 
+
+int AlphaScore::get_check_mate_score() {
+  return CHECK_MATE_SCORE;
+}
+
+int AlphaScore::get_stale_mate_score() {
+  return STALE_MATE_SCORE;
+}
 
 AlphaScore::AlphaScore() {
 
