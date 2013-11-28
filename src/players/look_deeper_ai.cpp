@@ -48,3 +48,25 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
   return move; 
 
 }
+
+
+int LookDeeperAI::get_recursive_score(Board board, int current_depth, Side side, bool is_our_turn) {
+
+  Candidates candidates(_width, is_our_turn);
+
+  // get_candidates(&candidates, board, is_our_side);
+  
+  
+  throw "not yet implemented!";
+
+  return 0;
+}
+
+void LookDeeperAI::get_candidates(Candidates &candidates, Board &board, Side side) {
+
+}
+
+void LookDeeperAI::update_candidates_scores(Candidates &candidates, int current_depth, Side side, bool is_our_turn) {
+
+
+} 

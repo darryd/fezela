@@ -44,18 +44,19 @@ Candidates::~Candidates() {
 }
 
 // Precondition: there are candidates.
-Board Candidates::select() {
+Board Candidates::get_winner(int *score) {
 
-  BoardScore selected;
+  BoardScore winner;
 
   if ( _total_candidates >= 1 )
-    selected = _candidates[0];
+    winner = _candidates[0];
 
   for (size_t i=0; i < _total_candidates; i++) 
-    if ( _compare_f ( _candidates->score, selected.score) == _candidates->score )
-      selected = _candidates[i];
+    if ( _compare_f ( _candidates->score, winner.score) == _candidates->score )
+      winner = _candidates[i];
 
-  return selected.board;
+  *score = winner.score;
+  return winner.board;
 }
 
 void Candidates::add(Board &board, int score) {
@@ -77,4 +78,12 @@ void Candidates::add(Board &board, int score) {
       }
 
   }
+}
+
+Board Candidates::get_board(size_t index) {
+
+  if ( index >= _total_candidates )
+    throw "Candidates::get_board(): index too big.";
+
+  return _candidates[index].board;
 }

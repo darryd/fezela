@@ -91,8 +91,12 @@ class Candidates {
   public:
     Candidates(size_t max_candidates = DEFAULT_MAX_CANDIDATES, bool get_max = true);
     ~Candidates();
-    Board select();
+    Board get_winner(int *score);
     void add(Board &board, int score);
+    size_t get_total_candidates() { return _total_candidates; }
+    size_t get_max_candidates() { return _max_candidates; }
+    Board get_board(size_t index);
+
   private:
     int (* _compare_f)(int a, int b);
     size_t _total_candidates;
@@ -111,7 +115,9 @@ class LookDeeperAI : public Player {
     int _depth;
     ScoreKeeper *_score_keeper;
     bool _need_to_delete_score_keeper;
-    Board r_get_best_score(Board board, int current_depth, bool isOurSide);
+    int get_recursive_score(Board board, int current_depth, Side side, bool is_our_turn);
+    void get_candidates(Candidates &candidates, Board &board, Side side);
+    void update_candidates_scores(Candidates &candidates, int current_depth, Side side, bool is_our_turn);
 };
 
 /*-------------------------------------------------------------------------------------------------*/
