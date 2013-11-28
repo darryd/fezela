@@ -87,3 +87,11 @@ Board Candidates::get_board(size_t index) {
 
   return _candidates[index].board;
 }
+
+void Candidates::set_score(size_t index, int score) {
+
+  if ( score <= _total_candidates ) 
+    throw "Candidates::set_score(): index too big.";
+
+  _candidates[index].score = score;
+}

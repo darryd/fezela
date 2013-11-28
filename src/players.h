@@ -96,6 +96,7 @@ class Candidates {
     size_t get_total_candidates() { return _total_candidates; }
     size_t get_max_candidates() { return _max_candidates; }
     Board get_board(size_t index);
+    void set_score(size_t index, int score);
 
   private:
     int (* _compare_f)(int a, int b);

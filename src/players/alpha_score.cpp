@@ -53,6 +53,16 @@ int AlphaScore::get_score(const Board &board, Side side) {
   int score = 0;
   Board copy_board(board);
 
+
+  /*
+  if ( copy_board.is_check_mate(side) )
+    return CHECK_MATE_SCORE;
+
+  if ( copy_board.is_stale_mate(side) )
+    return STALE_MATE_SCORE;
+    */
+
+
   for (int x=0; x<8; x++)
     for (int y=0; y<8; y++) {
 
