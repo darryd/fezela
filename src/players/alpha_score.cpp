@@ -23,19 +23,12 @@
 #include "../score.h"
 #include <climits>
 
-#define CHECK_MATE_SCORE INT_MAX
+#define THEM_CHECK_MATE_SCORE INT_MAX
+#define US_CHECK_MATE_SCORE INT_MIN
 #define STALE_MATE_SCORE -1000000
 
 
 using namespace std; 
-
-int AlphaScore::get_check_mate_score() {
-  return CHECK_MATE_SCORE;
-}
-
-int AlphaScore::get_stale_mate_score() {
-  return STALE_MATE_SCORE;
-}
 
 AlphaScore::AlphaScore() {
 
@@ -48,19 +41,19 @@ AlphaScore::AlphaScore() {
 
 }
 
-int AlphaScore::get_score(const Board &board, Side side) {
+int AlphaScore::get_score(const Board &board, Side side, bool is_our_turn) {
 
   int score = 0;
   Board copy_board(board);
 
 
-  /*
-  if ( copy_board.is_check_mate(side) )
-    return CHECK_MATE_SCORE;
+  if ( copy_board.is_check_mate(side) ) {
+
+    return is_our_turn ? US_CHECK_MATE_SCORE : THEM_CHECK_MATE_SCORE;
+  }
 
   if ( copy_board.is_stale_mate(side) )
     return STALE_MATE_SCORE;
-    */
 
 
   for (int x=0; x<8; x++)

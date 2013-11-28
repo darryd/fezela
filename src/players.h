@@ -117,7 +117,7 @@ class LookDeeperAI : public Player {
     ScoreKeeper *_score_keeper;
     bool _need_to_delete_score_keeper;
     int get_recursive_score(Board board, int current_depth, Side side, bool is_our_turn);
-    void get_candidates(Candidates &candidates, Board &board, Side side);
+    void get_candidates(Candidates &candidates, Board &board, Side side, bool is_our_turn);
     void update_candidates_scores(Candidates &candidates, int current_depth, Side side, bool is_our_turn);
 };
 

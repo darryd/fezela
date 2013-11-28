@@ -47,6 +47,10 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
 
   throw "not yet implemented.";
 
+  cout << "we'll use " << _depth << " when we start doing recursion..." << endl;
+
+
+
   return move; 
 }
 
@@ -55,13 +59,13 @@ int LookDeeperAI::get_recursive_score(Board board, int current_depth, Side side,
   Candidates candidates(_width, is_our_turn);
   int recursive_score;
 
-  get_candidates(candidates, board, side);
+  get_candidates(candidates, board, side, is_our_turn);
 
   if ( candidates.get_total_candidates() == 0 ) {
 
     // This means check or stale mate
     // TODO: thinking about this.... 
-    return _score_keeper->get_score(board, side);
+    return _score_keeper->get_score(board, side, is_our_turn);
   }
   
   if ( current_depth > 0 ) 
@@ -76,12 +80,12 @@ int LookDeeperAI::get_recursive_score(Board board, int current_depth, Side side,
   return recursive_score;
 }
 
-void LookDeeperAI::get_candidates(Candidates &candidates, Board &board, Side side) {
+void LookDeeperAI::get_candidates(Candidates &candidates, Board &board, Side side, bool is_our_turn) {
 
   vector<Board> board_moves = board.get_board_moves(side);
 
   for ( vector<Board>::iterator it = board_moves.begin(); it != board_moves.end(); ++it )
-    candidates.add(*it, _score_keeper->get_score(board, side));
+    candidates.add(*it, _score_keeper->get_score(board, side, is_our_turn));
 }
 
 void LookDeeperAI::update_candidates_scores(Candidates &candidates, int current_depth, Side side, bool is_our_turn) {

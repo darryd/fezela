@@ -23,19 +23,15 @@
 
 class ScoreKeeper {
   public:
-    virtual int get_score(const Board &board, Side side) = 0;
+    virtual int get_score(const Board &board, Side side, bool is_our_turn) = 0;
     virtual ~ScoreKeeper(){};
-    virtual int get_check_mate_score() = 0;
-    virtual int get_stale_mate_score() = 0;
 };
 
 class AlphaScore : public ScoreKeeper {
   public:
     AlphaScore();
     virtual ~AlphaScore(){};
-    virtual int get_score(const Board &board, Side side);
-    virtual int get_check_mate_score();
-    virtual int get_stale_mate_score();
+    virtual int get_score(const Board &board, Side side, bool is_our_turn);
   private:
     std::map<Kind, int > values;
 };
