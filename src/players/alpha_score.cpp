@@ -25,7 +25,8 @@
 
 #define THEM_CHECK_MATE_SCORE INT_MAX
 #define US_CHECK_MATE_SCORE INT_MIN
-#define STALE_MATE_SCORE -1000000
+#define US_STALE_MATE_SCORE -1000000
+#define THEM_STALE_MATE_SCORE -US_STALE_MATE_SCORE
 
 
 using namespace std; 
@@ -53,7 +54,7 @@ int AlphaScore::get_score(const Board &board, Side side, bool is_our_turn) {
   }
 
   if ( copy_board.is_stale_mate(side) )
-    return STALE_MATE_SCORE;
+    return is_our_turn ? US_STALE_MATE_SCORE : THEM_STALE_MATE_SCORE;;
 
 
   for (int x=0; x<8; x++)
