@@ -59,22 +59,24 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
 
 int LookDeeperAI::get_recursive_score(Board board, int current_depth, Side side, bool is_our_turn) {
 
-  Candidates candidates(_width, !is_our_turn);
-  int recursive_score;
-
-  get_candidates(candidates, board, Utl::opposite(side), !is_our_turn);
-
-  if ( candidates.get_total_candidates() == 0 ) {
-
+  if (current_depth == 0)
     return _score_keeper->get_score(board, side, is_our_turn);
-  }
-  
-  if ( current_depth > 0 ) 
-    update_candidates_scores(candidates, current_depth -1, Utl::opposite(side), !is_our_turn);
-  
 
-  candidates.get_winner(&recursive_score);
-  return recursive_score;
+  else {
+
+    int recursive_score;
+
+    side = Utl::opposite(side);
+    is_our_turn = !is_our_turn;
+    Candidates candidates(_width, is_our_turn);
+
+    get_candidates(candidates, board, side, is_our_turn);
+
+    update_candidates_scores(candidates, current_depth, side, is_our_turn);
+
+    candidates.get_winner(&recursive_score);
+    return recursive_score;
+  }
 }
 
 void LookDeeperAI::get_candidates(Candidates &candidates, Board &board, Side side, bool is_our_turn) {
@@ -90,7 +92,7 @@ void LookDeeperAI::update_candidates_scores(Candidates &candidates, int current_
   int total_candidates = candidates.get_total_candidates();
 
   for (int i=0; i < total_candidates; i++) {
-    
+
     int recursive_score;
 
     recursive_score = get_recursive_score(candidates.get_board(i), current_depth - 1, side, is_our_turn);
