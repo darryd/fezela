@@ -32,7 +32,7 @@ int main() {
   SimplyCountingAI simply_counting_ai;
   CountingAndCheckingAI counting_and_checking_ai;
   KeyboardPlayer keyboard;
-  LookDeeperAI look_deeper_ai(NULL, 5, 4);
+  LookDeeperAI look_deeper_ai(NULL, 5, 3);
 
   Game game(&counting_and_checking_ai, &look_deeper_ai);
 

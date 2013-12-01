@@ -51,7 +51,7 @@ Board Candidates::get_winner(int *score) {
   if ( _total_candidates >= 1 )
     winner = _candidates[0];
 
-  for (size_t i=0; i < _total_candidates; i++) 
+  for (size_t i=1; i < _total_candidates; i++) 
     if ( _compare_f ( _candidates->score, winner.score) == _candidates->score )
       winner = _candidates[i];
 
@@ -75,6 +75,8 @@ void Candidates::add(Board &board, int score) {
 	
 	_candidates[i].board = board;
 	_candidates[i].score = score;
+	
+	return;
       }
 
   }
@@ -94,4 +96,14 @@ void Candidates::set_score(size_t index, int score) {
     throw "Candidates::set_score(): index too big.";
 
   _candidates[index].score = score;
+}
+
+void Candidates::print() {
+  
+  for (size_t i=0; i < _total_candidates; i++) {
+
+    cout << i << ":" << endl;
+    cout << "Score = " << _candidates[i].score;
+    _candidates[i].board.print();
+  }
 }
