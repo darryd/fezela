@@ -52,7 +52,7 @@ Board Candidates::get_winner(int *score) {
     winner = _candidates[0];
 
   for (size_t i=1; i < _total_candidates; i++) 
-    if ( _compare_f ( _candidates->score, winner.score) == _candidates->score )
+    if ( _compare_f ( _candidates[i].score, winner.score) == _candidates[i].score )
       winner = _candidates[i];
 
   *score = winner.score;
