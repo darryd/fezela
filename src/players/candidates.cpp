@@ -35,7 +35,9 @@ Candidates::Candidates(size_t max_candidates, bool get_max) :_total_candidates(0
     exit(1);
   }
 
-  _compare_f = get_max ? Utl::max : Utl::min;
+  _compare_winner_f = get_max ? Utl::max : Utl::min;
+  _compare_loser_f  = get_max ? Utl::min : Utl::max;
+
 }
 
 Candidates::~Candidates() {
@@ -46,15 +48,16 @@ Candidates::~Candidates() {
 // Precondition: there are candidates.
 Board Candidates::get_winner(int *score) {
 
+  
   BoardScore winner;
-
+/*
   if ( _total_candidates >= 1 )
     winner = _candidates[0];
 
   for (size_t i=1; i < _total_candidates; i++) 
     if ( _compare_f ( _candidates[i].score, winner.score) == _candidates[i].score )
       winner = _candidates[i];
-
+*/
   *score = winner.score;
   return winner.board;
 }
@@ -67,17 +70,22 @@ void Candidates::add(Board &board, int score) {
     _candidates[_total_candidates].score = score;
 
     _total_candidates++;
+
   }
   else {
 
-    for (size_t i = 0; i < _max_candidates; i++)
+    /*
+    for (int i = _max_candidates - 1; i >= 0; i--) {
+
       if ( _compare_f(score, _candidates[i].score) == score ) {
-	
+
 	_candidates[i].board = board;
 	_candidates[i].score = score;
-	
-	return;
+
+	break;
       }
+    }
+    */
   }
 }
 
@@ -98,7 +106,7 @@ void Candidates::set_score(size_t index, int score) {
 }
 
 void Candidates::print() {
-  
+
   int width = 25;
   int row;
   int col;

@@ -100,12 +100,16 @@ class Candidates {
     void print();
 
   private:
-    int (* _compare_f)(int a, int b);
+    
+    typedef int (* CompareFunc)(int a, int b);
+    CompareFunc _compare_winner_f;
+    CompareFunc _compare_loser_f;
     size_t _total_candidates;
     size_t _max_candidates;
     BoardScore *_candidates;
 };
 
+#if 0
 class LookDeeperAI : public Player {
 
   public:
@@ -121,6 +125,6 @@ class LookDeeperAI : public Player {
     void get_candidates(Candidates &candidates, Board &board, Side side, bool is_our_turn);
     void update_candidates_scores(Candidates &candidates, int current_depth, Side side, bool is_our_turn);
 };
-
+#endif
 /*-------------------------------------------------------------------------------------------------*/
 

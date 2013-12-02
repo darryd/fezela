@@ -274,7 +274,7 @@ class Board {
     Board();
     void clear();
     void set();
-    void print(int row=0, int col=0);
+    void print(int row=2, int col=0);
     void print_check(Side side, int row=0, int col=0);
 
     Move get_move() { return _last_move; }

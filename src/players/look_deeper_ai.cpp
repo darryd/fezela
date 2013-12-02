@@ -18,7 +18,7 @@
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-
+#if 0
 #include "../players.h"
 
 using namespace std; 
@@ -106,3 +106,4 @@ void LookDeeperAI::update_candidates_scores(Candidates &candidates, int current_
     candidates.set_score(i, recursive_score);
   }
 } 
+#endif

@@ -32,22 +32,32 @@ int main() {
   SimplyCountingAI simply_counting_ai;
   CountingAndCheckingAI counting_and_checking_ai;
   KeyboardPlayer keyboard;
-  LookDeeperAI look_deeper_ai(NULL, 5, 2);
+//  LookDeeperAI look_deeper_ai(NULL, 5, 2);
 
-  //Game game(&counting_and_checking_ai, &random_ai);
+  /*
+  Game game(&counting_and_checking_ai, &look_deeper_ai);
 
-  //game.play();
+  game.play();
   
+
+  return 0;
+*/
   Board board;
   board.set();
 
-  Candidates candidates;
+  Candidates candidates(5, true);
 
-  for (int i=0; i<15; i++)
+  for (int i=0; i<100; i++)
     candidates.add(board, i);
 
   candidates.print();
 
+  int score;
 
+  candidates.get_winner(&score);
+
+  cout << "winning score: " << score << endl;
 
 }
+
+
