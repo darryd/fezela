@@ -39,9 +39,15 @@ int main() {
   //game.play();
   
   Board board;
-  
   board.set();
 
-  board.print(20, 50);
+  Candidates candidates;
+
+  for (int i=0; i<15; i++)
+    candidates.add(board, i);
+
+  candidates.print();
+
+
 
 }

@@ -78,7 +78,6 @@ void Candidates::add(Board &board, int score) {
 	
 	return;
       }
-
   }
 }
 
@@ -100,10 +99,22 @@ void Candidates::set_score(size_t index, int score) {
 
 void Candidates::print() {
   
+  int width = 25;
+  int row;
+  int col;
+  int margin = 10;
+
   for (size_t i=0; i < _total_candidates; i++) {
 
-    cout << i << ":" << endl;
+    row = margin;
+
+    col = margin + width * i;
+
+    Utl::move_cursor(row, col);
+    cout << i << ":";
+    Utl::move_cursor(++row, col);
     cout << "Score = " << _candidates[i].score;
-    _candidates[i].board.print();
+    Utl::move_cursor(++row, col);
+    _candidates[i].board.print(row, col);
   }
 }
