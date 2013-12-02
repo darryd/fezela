@@ -50,14 +50,14 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
   Candidates candidates(_width, true);
   get_candidates(candidates, copy_board, side, true);
 
-  candidates.print();
-  char junk;
-  cin >> junk;
+  //candidates.print();
+  //char junk;
+  //cin >> junk;
 
   update_candidates_scores(candidates, _depth, side, true);
 
-  candidates.print();
-  cin >> junk;
+  //candidates.print();
+  //cin >> junk;
 
   board_move = candidates.get_winner(&score);
 

@@ -162,9 +162,9 @@ void Board::set() {
  * Displays the board on the terminal using ascii characters and vt100 emulation codes.
  *
  * ------------------------------------------------------------------------------------------------------*/
-void Board::print() {
+void Board::print(int row, int col) {
 
-  cout << endl;
+  Utl::move_cursor(row, col);
 
   for (int y=7; y>=0; y--) {
 
@@ -189,13 +189,19 @@ void Board::print() {
 	cout << piece->get_ascii_code() << ' ';
       }
     }
-    cout << endl;
+    //cout << endl;
+    Utl::move_cursor(++row, col);
   }
-  cout << endl << "   a b c d e f g h" << endl << endl;
+  Utl::move_cursor(++row, col);
+  cout << "   a b c d e f g h";// << endl << endl;
+
+  Utl::move_cursor(++row, col);
+  Utl::move_cursor(++row, col);
 
   print_check(white);
   print_check(black);
 
+  cout.flush();
 }
 
 /*--------------------------------------------------------------------------------------------------------
@@ -204,16 +210,22 @@ void Board::print() {
  * This function will display infomation if 'side' is in check. Otherwise, nothing is displayed.
  *
  * ------------------------------------------------------------------------------------------------------*/
-void Board::print_check(Side side) {
+void Board::print_check(Side side, int row, int col) {
 
-  if ( is_check_mate(side) )
-    cout << CODE_IN_CHECK << Utl::str(side) << " is in check mate!" << endl << CODE_RESET;
+  if ( is_check_mate(side) ) {
+    cout << CODE_IN_CHECK << Utl::str(side) << " is in checkmate!" << CODE_RESET;
+    Utl::move_cursor(++row, col);
+  }
 
-  else if ( is_stale_mate(side) )
-    cout << CODE_IN_CHECK << Utl::str(side) << " is in stale mate!" << endl << CODE_RESET;
+  else if ( is_stale_mate(side) ) {
+    cout << CODE_IN_CHECK << Utl::str(side) << " is in stalemate!" << endl << CODE_RESET;
+    Utl::move_cursor(++row, col);
+  }
 
-  else if ( is_in_check(side) )
+  else if ( is_in_check(side) ) {
     cout << CODE_IN_CHECK << Utl::str(side) << " is in check!" << endl << CODE_RESET;
+    Utl::move_cursor(++row, col);
+  }
 
 }
 

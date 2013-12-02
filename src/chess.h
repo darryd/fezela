@@ -33,6 +33,7 @@
 #include <string>
 #include <string.h>
 #include <pthread.h>
+#include <sstream>
 
 #if 0 
 #define DEBUG_ALLOW_ILLEGAL_MOVES // For testing, if you want to be able to move pieces anywhere.
@@ -59,6 +60,7 @@
 #define CODE_IN_CHECK ""
 
 #endif
+
 
 enum Side { white, black };
 enum Kind { rook, knight, bishop, queen, king, pawn };
@@ -97,6 +99,9 @@ struct Utl {
     return a > b ? a : b;
   }
 
+  static void move_cursor (int row, int col) {
+    std::cout <<  "\33[" << row << ";" << col << "H";
+  }
 
 };
 
@@ -209,19 +214,19 @@ class Pawn : public Piece {
 
 struct Move {
 
-    Position old_pos;
-    Position new_pos;
+  Position old_pos;
+  Position new_pos;
 
-    bool is_castling;
-    bool is_en_passant;
+  bool is_castling;
+  bool is_en_passant;
 
-    Piece *promotion;
+  Piece *promotion;
 
-    Position extra_old_pos;
-    Position extra_new_pos;
+  Position extra_old_pos;
+  Position extra_new_pos;
 
-    Move():old_pos(Position(0,0)), new_pos(Position(0,0)), is_castling(false), is_en_passant(false),
-    promotion(NULL), extra_old_pos(Position(0,0)), extra_new_pos(Position(0,0)){}
+  Move():old_pos(Position(0,0)), new_pos(Position(0,0)), is_castling(false), is_en_passant(false),
+  promotion(NULL), extra_old_pos(Position(0,0)), extra_new_pos(Position(0,0)){}
 };
 
 /*---------------------------------------------------------------------------------------------------------
@@ -269,8 +274,8 @@ class Board {
     Board();
     void clear();
     void set();
-    void print();
-    void print_check(Side side);
+    void print(int row=0, int col=0);
+    void print_check(Side side, int row=0, int col=0);
 
     Move get_move() { return _last_move; }
 
