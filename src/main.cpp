@@ -52,10 +52,7 @@ int main() {
 
   candidates.print();
 
-  BoardScore win_board_score;
-  BoardScore lose_board_score;
-  
-
+  BoardScore board_score;
 
   board_score = candidates.get_winner();
 
