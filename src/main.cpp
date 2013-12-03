@@ -54,7 +54,7 @@ int main() {
 
   int score;
 
-  candidates.get_winner(&score);
+  //candidates.get_winner(&score);
 
   cout << "winning score: " << score << endl;
 
