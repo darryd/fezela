@@ -46,21 +46,22 @@ Candidates::~Candidates() {
 }
 
 // Precondition: there are candidates.
+/*
 Board Candidates::get_winner(int *score) {
 
   
   BoardScore winner;
-/*
+
   if ( _total_candidates >= 1 )
     winner = _candidates[0];
 
   for (size_t i=1; i < _total_candidates; i++) 
     if ( _compare_f ( _candidates[i].score, winner.score) == _candidates[i].score )
       winner = _candidates[i];
-*/
+
   *score = winner.score;
   return winner.board;
-}
+}*/
 
 void Candidates::add(Board &board, int score) {
 
