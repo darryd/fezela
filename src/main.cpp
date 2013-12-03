@@ -52,11 +52,14 @@ int main() {
 
   candidates.print();
 
-  int score;
+  BoardScore win_board_score;
+  BoardScore lose_board_score;
+  
 
-  //candidates.get_winner(&score);
 
-  cout << "winning score: " << score << endl;
+  board_score = candidates.get_winner();
+
+  cout << endl << "winning score: " << board_score.score << endl;
 
 }
 

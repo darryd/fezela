@@ -46,22 +46,32 @@ Candidates::~Candidates() {
 }
 
 // Precondition: there are candidates.
-/*
-Board Candidates::get_winner(int *score) {
+BoardScore Candidates::get_winner() {
 
-  
+  return get_candidate(_compare_winner_f);
+}
+
+// Precondition: there are candidates.
+BoardScore Candidates::get_loser() {
+  return get_candidate(_compare_loser_f);
+}
+
+
+
+// Precondition: there are candidates.
+BoardScore Candidates::get_candidate(Candidates::CompareFunc cmp) {
+ 
   BoardScore winner;
 
   if ( _total_candidates >= 1 )
     winner = _candidates[0];
 
   for (size_t i=1; i < _total_candidates; i++) 
-    if ( _compare_f ( _candidates[i].score, winner.score) == _candidates[i].score )
+    if ( cmp ( _candidates[i].score, winner.score) == _candidates[i].score )
       winner = _candidates[i];
 
-  *score = winner.score;
-  return winner.board;
-}*/
+  return winner;
+}
 
 void Candidates::add(Board &board, int score) {
 

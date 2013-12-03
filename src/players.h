@@ -92,18 +92,21 @@ class Candidates {
     Candidates(size_t max_candidates = DEFAULT_MAX_CANDIDATES, bool get_max = true);
     ~Candidates();
     //Board get_winner(int *score);
+    //
+
+    BoardScore get_winner();
+    BoardScore get_loser();
+
     void add(Board &board, int score);
     size_t get_total_candidates() { return _total_candidates; }
     size_t get_max_candidates() { return _max_candidates; }
     Board get_board(size_t index);
     void set_score(size_t index, int score);
     void print();
-    BoardScore get_winner();
-    BoardScore get_loser();
 
   private:
-    
     typedef int (* CompareFunc)(int a, int b);
+    
     CompareFunc _compare_winner_f;
     CompareFunc _compare_loser_f;
     size_t _total_candidates;
