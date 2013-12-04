@@ -34,6 +34,7 @@ int main() {
   KeyboardPlayer keyboard;
 //  LookDeeperAI look_deeper_ai(NULL, 5, 2);
 
+  
   /*
   Game game(&counting_and_checking_ai, &look_deeper_ai);
 
@@ -41,7 +42,8 @@ int main() {
   
 
   return 0;
-*/
+
+  */
   Board board;
   board.set();
 
@@ -57,7 +59,6 @@ int main() {
   board_score = candidates.get_winner();
 
   cout << endl << "winning score: " << board_score.score << endl;
-
 }
 
 

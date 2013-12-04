@@ -37,7 +37,6 @@ Candidates::Candidates(size_t max_candidates, bool get_max) :_total_candidates(0
 
   _compare_winner_f = get_max ? Utl::max : Utl::min;
   _compare_loser_f  = get_max ? Utl::min : Utl::max;
-
 }
 
 Candidates::~Candidates() {
@@ -47,7 +46,6 @@ Candidates::~Candidates() {
 
 // Precondition: there are candidates.
 BoardScore Candidates::get_winner() {
-
   return get_candidate(_compare_winner_f);
 }
 
@@ -56,21 +54,23 @@ BoardScore Candidates::get_loser() {
   return get_candidate(_compare_loser_f);
 }
 
-
-
 // Precondition: there are candidates.
 BoardScore Candidates::get_candidate(Candidates::CompareFunc cmp) {
  
-  BoardScore winner;
+  BoardScore the_candidate;
 
-  if ( _total_candidates >= 1 )
-    winner = _candidates[0];
+  if ( _total_candidates >= 1 ) {
+    the_candidate = _candidates[0];
+    the_candidate.index = 0;
+  }
 
   for (size_t i=1; i < _total_candidates; i++) 
-    if ( cmp ( _candidates[i].score, winner.score) == _candidates[i].score )
-      winner = _candidates[i];
+    if ( cmp ( _candidates[i].score, the_candidate.score) == _candidates[i].score ) {
+      the_candidate = _candidates[i];
+      the_candidate.index = i;
+    }
 
-  return winner;
+  return the_candidate;
 }
 
 void Candidates::add(Board &board, int score) {
@@ -81,22 +81,17 @@ void Candidates::add(Board &board, int score) {
     _candidates[_total_candidates].score = score;
 
     _total_candidates++;
-
   }
   else {
 
-    /*
-    for (int i = _max_candidates - 1; i >= 0; i--) {
+    BoardScore lowest_candidate;
+    lowest_candidate = get_loser();
 
-      if ( _compare_f(score, _candidates[i].score) == score ) {
+    if ( _compare_winner_f(score, lowest_candidate.score ) == score) {
 
-	_candidates[i].board = board;
-	_candidates[i].score = score;
-
-	break;
-      }
+      _candidates[lowest_candidate.index].board = board;
+      _candidates[lowest_candidate.index].score = score;
     }
-    */
   }
 }
 

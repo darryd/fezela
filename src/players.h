@@ -84,6 +84,7 @@ class KeyboardPlayer : public Player {
 struct BoardScore {
   Board board;
   int score;
+  size_t index;
 };
   
 class Candidates {
@@ -95,7 +96,6 @@ class Candidates {
     //
 
     BoardScore get_winner();
-    BoardScore get_loser();
 
     void add(Board &board, int score);
     size_t get_total_candidates() { return _total_candidates; }
@@ -113,6 +113,7 @@ class Candidates {
     size_t _max_candidates;
     BoardScore *_candidates;
     BoardScore get_candidate(CompareFunc cmp);
+    BoardScore get_loser();
 };
 
 #if 0
