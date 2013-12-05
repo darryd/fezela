@@ -44,7 +44,6 @@ AlphaScore::AlphaScore() {
 
 int AlphaScore::get_score(const Board &board, Side side, bool is_our_turn) {
 
-  int score = 0;
   Board copy_board(board);
 
 
@@ -57,15 +56,23 @@ int AlphaScore::get_score(const Board &board, Side side, bool is_our_turn) {
     return is_our_turn ? US_STALE_MATE_SCORE : THEM_STALE_MATE_SCORE;;
 
 
+  return get_score_count(copy_board, side);
+}
+
+int AlphaScore::get_score_count(Board board, Side side) {
+
+  int score = 0;
+
   for (int x=0; x<8; x++)
     for (int y=0; y<8; y++) {
 
-      Piece *piece = copy_board.get_piece(x, y);
+      Piece *piece = board.get_piece(x, y);
 
       if (piece == NULL)
 	continue;
 
       score += values[piece->get_kind()] * (side == piece->get_side() ? 1 : -1);
     }
+
   return score;
-}
+} 
