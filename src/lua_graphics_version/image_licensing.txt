@@ -1,4 +1,4 @@
-All the images used for Chess pieces are from wikipedia. According to wikipedia, these images
+All the images used for chess pieces are from wikipedia. According to wikipedia, these images
 are licensed under GFDL & BSD & GPL. 
 
 Images:
