@@ -1,4 +1,3 @@
-#! /usr/bin/lua
 
 --[[
     Copyright 2013 Darry Danzig
@@ -18,6 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 ]]
+
+#! /usr/bin/lua
+
 function opponent_side(side) 
 
   if side == "w" then

@@ -1,0 +1,14 @@
+convert -resize 64x b_bishop.png b_bishop.png
+convert -resize 64x b_king.png b_king.png
+convert -resize 64x b_knight.png b_knight.png
+convert -resize 64x b_pawn.png b_pawn.png
+convert -resize 64x b_queen.png b_queen.png
+convert -resize 64x b_rook.png b_rook.png
+convert -resize 64x pawn.png pawn.png
+convert -resize 64x rook.png rook.png
+convert -resize 64x w_bishop.png w_bishop.png
+convert -resize 64x w_king.png w_king.png
+convert -resize 64x w_knight.png w_knight.png
+convert -resize 64x w_pawn.png w_pawn.png
+convert -resize 64x w_queen.png w_queen.png
+convert -resize 64x w_rook.png w_rook.png

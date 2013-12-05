@@ -1,5 +1,3 @@
--- Graphics written by Christopher Porter and Darry Danzig
-
 
 --[[
     Copyright 2013 Darry Danzig
@@ -19,6 +17,8 @@
     You should have received a copy of the GNU General Public License
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 ]]
+
+-- Graphics written by Christopher Porter and Darry Danzig
 
 dofile "game.lua"
 

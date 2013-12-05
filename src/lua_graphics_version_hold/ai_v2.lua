@@ -1,5 +1,3 @@
-#!  /usr/bin/lua
---dofile "chess.lua"
 
 --[[
     Copyright 2013 Darry Danzig
@@ -19,6 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 ]]
+
+#!  /usr/bin/lua
+--dofile "chess.lua"
+
 ai_v2 = {}
 
 function ai_v2.init(side)

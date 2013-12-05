@@ -1,5 +1,3 @@
-#!  /usr/bin/lua
-
 
 --[[
     Copyright 2013 Darry Danzig
@@ -20,6 +18,7 @@
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
+#!  /usr/bin/lua
 dofile "util.lua";
 dofile "eval.lua";
 dofile "covers.lua";
