@@ -33,46 +33,11 @@ int main() {
   CountingAndCheckingAI counting_and_checking_ai;
   KeyboardPlayer keyboard;
   LookDeeperAI look_deeper_ai(5, 2);
-
-  
   
   Game game(&random_ai, &look_deeper_ai);
-
   game.play();
   
-
   return 0;
-
-  /*
- 
-  Board board;
-  board.set();
-  Candidates candidates;
-
-  LookDeeperAI look_deeper_ai(5, 2);
-
-  */
-
-  /*
-
-  vector<Board> board_moves = board.get_board_moves(white);
-
-  for (vector<Board>::iterator it = board_moves.begin(); it != board_moves.end(); ++it) {
-    candidates.nominate(*it, 100);
-  }
-
-
-  candidates.print();
-
-  */
-  //look_deeper_ai.get_candidates(candidates,  board, white, true);
-  //candidates.print();
-  //
-  
-  
-
- 
-
 }
 
 

@@ -34,6 +34,8 @@ class AlphaScore : public ScoreKeeper {
     virtual int get_score(const Board &board, Side side, bool is_our_turn);
   private:
     std::map<Kind, int > values;
-    int get_score_count(Board board, Side side);
+    int get_score_board(Board board, Side side);
+    int score_counting_pieces(Piece *piece, Side side);
+    int score_covering_pieces(Piece *piece, Board &board, int x, int y);
 
 };
