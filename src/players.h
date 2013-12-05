@@ -31,6 +31,17 @@
 #include "chess.h"
 #include "score.h"
 
+
+/*-------------------------------------------------------------------------------------------------*/
+
+class AI : public Player {
+
+  public:
+    AI();
+    static int random(int i);
+    virtual Move play_turn(const Board &board, Side side) = 0;
+};
+
 /*-------------------------------------------------------------------------------------------------*/
 
 class RandomAI : public Player {
@@ -112,7 +123,7 @@ class Candidates {
     BoardScore get_loser();
 };
 
-class LookDeeperAI : public Player {
+class LookDeeperAI : public AI {
   public:
     LookDeeperAI(int width=1, int depth=1, ScoreKeeper *score_keeper = NULL); 
     ~LookDeeperAI();

@@ -22,7 +22,8 @@ MODULES = \
       build/utl.o \
       build/alpha_score.o \
       build/look_deeper_ai.o \
-      build/candidates.o
+      build/candidates.o \
+      build/ai.o
 
 all: build fezela
 

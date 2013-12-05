@@ -20,10 +20,11 @@
 
 */
 #include "../players.h"
+#include <algorithm>
 
 using namespace std; 
 
-LookDeeperAI::LookDeeperAI(int width, int depth, ScoreKeeper *score_keeper) : _width(width), _depth(depth) {
+LookDeeperAI::LookDeeperAI(int width, int depth, ScoreKeeper *score_keeper) : AI(), _width(width), _depth(depth) {
 
   if ( score_keeper == NULL ) {
     _need_to_delete_score_keeper = true;
@@ -57,6 +58,7 @@ Move LookDeeperAI::play_turn(const Board &board, Side side) {
 void LookDeeperAI::get_candidates(Candidates &candidates, Board board, Side side, bool is_our_turn) {
 
   vector<Board> board_moves = board.get_board_moves(side);
+  random_shuffle( board_moves.begin(), board_moves.end(), AI::random);
 
   for (vector<Board>::iterator it = board_moves.begin(); it != board_moves.end(); ++it) {
     candidates.nominate( *it, _score_keeper->get_score(*it, side, is_our_turn));

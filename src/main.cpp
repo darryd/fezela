@@ -32,9 +32,10 @@ int main() {
   SimplyCountingAI simply_counting_ai;
   CountingAndCheckingAI counting_and_checking_ai;
   KeyboardPlayer keyboard;
-  LookDeeperAI look_deeper_ai(5, 2);
+  LookDeeperAI look_deeper_ai_1(5, 1);
+  LookDeeperAI look_deeper_ai_2(5, 2);
   
-  Game game(&random_ai, &look_deeper_ai);
+  Game game(&look_deeper_ai_1, &look_deeper_ai_2);
   game.play();
   
   return 0;
