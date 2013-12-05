@@ -1,0 +1,18 @@
+All the images used for Chess pieces are from wikipedia. According to wikipedia, these images
+are licensed under GFDL & BSD & GPL. 
+
+http://en.wikipedia.org/wiki/File:Chess_rdt45.svg
+http://en.wikipedia.org/wiki/File:Chess_ndt45.svg
+http://en.wikipedia.org/wiki/File:Chess_bdt45.svg
+http://en.wikipedia.org/wiki/File:Chess_qdt45.svg
+http://en.wikipedia.org/wiki/File:Chess_kdt45.svg
+http://en.wikipedia.org/wiki/File:Chess_pdt45.svg
+http://en.wikipedia.org/wiki/File:Chess_rlt45.svg
+http://en.wikipedia.org/wiki/File:Chess_nlt45.svg
+http://en.wikipedia.org/wiki/File:Chess_blt45.svg
+http://en.wikipedia.org/wiki/File:Chess_qlt45.svg
+http://en.wikipedia.org/wiki/File:Chess_klt45.svg
+http://en.wikipedia.org/wiki/File:Chess_plt45.svg
+
+
+
