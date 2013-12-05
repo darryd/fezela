@@ -92,12 +92,8 @@ class Candidates {
   public:
     Candidates(size_t max_candidates = DEFAULT_MAX_CANDIDATES, bool get_max = true);
     ~Candidates();
-    //Board get_winner(int *score);
-    //
-
     BoardScore get_winner();
-
-    void add(Board &board, int score);
+    void nominate(Board board, int score);
     size_t get_total_candidates() { return _total_candidates; }
     size_t get_max_candidates() { return _max_candidates; }
     Board get_board(size_t index);
@@ -114,6 +110,24 @@ class Candidates {
     BoardScore *_candidates;
     BoardScore get_candidate(CompareFunc cmp);
     BoardScore get_loser();
+};
+
+class LookDeeperAI : public Player {
+  public:
+    LookDeeperAI(int width=1, int depth=1, ScoreKeeper *score_keeper = NULL); 
+    ~LookDeeperAI();
+    virtual Move play_turn(const Board &board, Side side);
+
+    // public while i'm testing
+    void get_candidates(Candidates &candidates, Board board, Side side, bool is_our_turn);
+
+    int get_recursive_score(int depth, Board board, Side side, bool is_our_turn);
+    BoardScore helper_get_recursive_score(Candidates &candidates, int depth, Side side, bool is_our_turn);
+  private:
+    int _width;
+    int _depth;
+    ScoreKeeper *_score_keeper;
+    bool _need_to_delete_score_keeper;
 };
 
 #if 0

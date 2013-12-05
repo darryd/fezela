@@ -73,7 +73,7 @@ BoardScore Candidates::get_candidate(Candidates::CompareFunc cmp) {
   return the_candidate;
 }
 
-void Candidates::add(Board &board, int score) {
+void Candidates::nominate(Board board, int score) {
 
   if ( _total_candidates < _max_candidates ) {
 
