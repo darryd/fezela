@@ -23,7 +23,8 @@ MODULES = \
       build/alpha_score.o \
       build/look_deeper_ai.o \
       build/candidates.o \
-      build/ai.o
+      build/ai.o \
+      build/one_level_ai.o
 
 all: build fezela
 

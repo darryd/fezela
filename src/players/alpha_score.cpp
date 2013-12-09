@@ -71,7 +71,7 @@ int AlphaScore::get_score_board(Board board, Side side) {
 	continue;
 
       score += score_counting_pieces(piece, side);
-      score += score_covering_pieces(piece, board, x, y);
+      score += score_covering_pieces(piece, board, x, y, side);
     }
 
   return score;
@@ -85,7 +85,7 @@ int AlphaScore::score_counting_pieces(Piece *piece, Side side) {
   return values[piece->get_kind()] * (side == piece->get_side() ? 1 : -1);
 }
 
-int AlphaScore::score_covering_pieces(Piece *piece, Board &board, int x, int y) {
+int AlphaScore::score_covering_pieces(Piece *piece, Board &board, int x, int y, Side side) {
 
   if ( piece == NULL )
     return 0;
@@ -97,8 +97,14 @@ int AlphaScore::score_covering_pieces(Piece *piece, Board &board, int x, int y) 
   piece->covers(covers, board, pos);
 
   for (vector<Position>::iterator it = covers.begin(); it != covers.end(); ++it) {
+
+
+    int factor = piece->get_side() == side ? 1 : -1;
+
     if ( board.get_piece(*it) != NULL ) 
-      score += POINTS_FOR_COVERING;
+      score += POINTS_FOR_COVERING * factor;
+    else
+      score += 1 * factor;
   }
 
   return score;

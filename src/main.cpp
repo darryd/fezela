@@ -34,8 +34,9 @@ int main() {
   KeyboardPlayer keyboard;
   LookDeeperAI look_deeper_ai_1(5, 1);
   LookDeeperAI look_deeper_ai_2(5, 2);
+  OneLevelAI one_level_ai;
   
-  Game game(&look_deeper_ai_1, &look_deeper_ai_2);
+  Game game(&one_level_ai, &counting_and_checking_ai);
   game.play();
   
   return 0;

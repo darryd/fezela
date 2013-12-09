@@ -123,6 +123,14 @@ class Candidates {
     BoardScore get_loser();
 };
 
+class OneLevelAI : public AI {
+  public:
+    virtual Move play_turn(const Board &board, Side side);
+  private:
+    AlphaScore _score_keeper;
+    Board get_best_move(std::vector<Board> &board_moves, Side side);
+};
+
 class LookDeeperAI : public AI {
   public:
     LookDeeperAI(int width=1, int depth=1, ScoreKeeper *score_keeper = NULL); 

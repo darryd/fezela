@@ -19,23 +19,28 @@
     along with Fezela.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-#pragma once
+#include "../players.h"
+#include <algorithm>
 
-class ScoreKeeper {
-  public:
-    virtual int get_score(const Board &board, Side side, bool is_our_turn) = 0;
-    virtual ~ScoreKeeper(){};
-};
+using namespace std; 
 
-class AlphaScore : public ScoreKeeper {
-  public:
-    AlphaScore();
-    virtual ~AlphaScore(){};
-    virtual int get_score(const Board &board, Side side, bool is_our_turn);
-  private:
-    std::map<Kind, int > values;
-    int get_score_board(Board board, Side side);
-    int score_counting_pieces(Piece *piece, Side side);
-    int score_covering_pieces(Piece *piece, Board &board, int x, int y, Side side);
+Move OneLevelAI::play_turn(const Board &board, Side side) {
 
-};
+  Board copy_board(board);
+
+  vector<Board> board_moves = copy_board.get_board_moves(side);
+  random_shuffle( board_moves.begin(), board_moves.end(), AI::random);
+
+  return get_best_move(board_moves, side).get_move();
+}
+
+Board OneLevelAI::get_best_move(vector<Board> &board_moves, Side side) {
+
+  Candidates candidates(1, true);
+
+  for (vector<Board>::iterator it = board_moves.begin(); it != board_moves.end(); ++it)
+    candidates.nominate(*it, _score_keeper.get_score(*it, side, true));
+
+  return candidates.get_winner().board;
+
+}
